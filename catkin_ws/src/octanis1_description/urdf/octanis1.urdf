@@ -1,0 +1,101 @@
+<robot name="Octanis1">
+	<link name="body">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="2500"/>
+			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+		</inertial>
+		<visual>
+			<origin xyz="-16 -16 -10" rpy="0 0 0"/>
+			<geometry>
+				<box size="32 32 16" />
+			</geometry>
+		</visual>
+
+		<collision>
+			<origin xyz="-16 -16 -10" rpy="0 0 0"/>
+			<geometry>
+				<box size="32 32 16" />
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="axe_front_left" />
+	<link name="axe_front_right" />
+	<link name="axe_back_right" />
+	<link name="axe_back_left" />
+	<link name="wheel_front_left" />
+	<link name="wheel_front_right" />
+	<link name="wheel_back_right" />
+	<link name="wheel_back_left" />
+	<link name="LIDAR" />
+	<link name="IMU" />
+
+	<joint name="joint_axe_front_left" type="continuous">
+		<parent link="body" />
+		<child link="axe_front_left" />
+		<origin xyz="-17.5 0 0" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_front_right" type="continuous">
+		<parent link="body" />
+		<child link="axe_front_right" />
+		<origin xyz="17.5 0 0" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_back_right" type="continuous">
+		<parent link="body" />
+		<child link="axe_back_right" />
+		<origin xyz="16 0 0" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_back_left" type="continuous">
+		<parent link="body" />
+		<child link="axe_back_left" />
+		<origin xyz="-16 0 0" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_LIDAR" type="fixed">
+		<parent link="body" />
+		<child link="LIDAR" />
+		<origin xyz="0 13 0" rpy="0 0 0" />
+	</joint>
+
+	<joint name="joint_IMU" type="fixed">
+		<parent link="body" />
+		<child link="IMU" />
+		<origin xyz="0 9 0" rpy="0 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_front_left" type="continuous">
+		<parent link="axe_front_left" />
+		<child link="wheel_front_left" />
+		<origin xyz="0 17 -20" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_front_right" type="continuous">
+		<parent link="axe_front_right" />
+		<child link="wheel_front_right" />
+		<origin xyz="0 17 -20" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_back_right" type="continuous">
+		<parent link="axe_back_right" />
+		<child link="wheel_back_right" />
+		<origin xyz="0 -17 -20" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_back_left" type="continuous">
+		<parent link="axe_back_left" />
+		<child link="wheel_back_left" />
+		<origin xyz="0 -17 -20" rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+</robot>
