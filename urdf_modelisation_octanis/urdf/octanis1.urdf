@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<robot name="Octanis1">
+	<link name="base_link">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="2500"/>
+			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="32 32 16" />
+			</geometry>
+			<material name="yellow">
+        		<color rgba="0.97 0.79 0.2 1"/>
+        	</material>
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="32 32 16" />
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="axe_front_left">
+		<visual>
+			<origin xyz="0 11.75 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+			<material name="white">
+        		<color rgba="1 1 0.8 1"/>
+        	</material>
+		</visual>
+
+		<collision>
+			<origin xyz="0 11.75 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="axe_front_right">
+		<visual>
+			<origin xyz="0 11.75 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 11.75 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="axe_back_right">
+		<visual>
+			<origin xyz="0 11.75 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="axe_back_left">
+		<visual>
+			<origin xyz="0 11.75 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 -2" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.5 27.5 4" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_front_left">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_front_right">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_back_right">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_back_left">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="4.5" radius="8"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="LIDAR" />
+	<link name="IMU" />
+
+	<joint name="joint_axe_front_left" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_front_left" />
+		<origin xyz="-16.75 0 -2" rpy="-0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_front_right" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_front_right" />
+		<origin xyz="16.75 0 -2" rpy="-0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_back_right" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_back_right" />
+		<origin xyz="18.25 0 -2" rpy="-2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_back_left" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_back_left" />
+		<origin xyz="-18.25 0 -2" rpy="-2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_LIDAR" type="fixed">
+		<parent link="base_link" />
+		<child link="LIDAR" />
+		<origin xyz="0 13 0" rpy="0 0 0" />
+	</joint>
+
+	<joint name="joint_IMU" type="fixed">
+		<parent link="base_link" />
+		<child link="IMU" />
+		<origin xyz="0 9 0" rpy="0 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_front_left" type="continuous">
+		<parent link="axe_front_left" />
+		<child link="wheel_front_left" />
+		<origin xyz="-3 25 0" rpy="0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_front_right" type="continuous">
+		<parent link="axe_front_right" />
+		<child link="wheel_front_right" />
+		<origin xyz="3 25 0" rpy="0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_back_right" type="continuous">
+		<parent link="axe_back_right" />
+		<child link="wheel_back_right" />
+		<origin xyz="3 25 0" rpy="2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_back_left" type="continuous">
+		<parent link="axe_back_left" />
+		<child link="wheel_back_left" />
+		<origin xyz="-3 25 0" rpy="2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+</robot>
