@@ -1,11 +1,34 @@
 <?xml version="1.0"?>
-<robot name="octanis1">
-	<link name="base_link">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="octanis1">
+
+	<!-- NAME OF THE ROBOT -->
+	<xacro:property name="name_robot" value="octanis1" />
+	<!-- POSITION CONSTANTS (only whose which can change) -->
+	<xacro:property name="length_LIDAR" value="0.06" />
+	<xacro:property name="radius_LIDAR" value="0.076" />
+	<xacro:property name="radius_wheel" value="0.08" />
+	<xacro:property name="length_wheel" value="0.045" />
+	<!-- INERTIAL CONSTANTS (because they can change) -->
+	<xacro:property name="weight_box" value="2.5" />
+	<xacro:property name="weight_LIDAR" value="0.2" />
+	<xacro:property name="weight_axe" value="0.3" />
+	<xacro:property name="weight_wheel" value="0.2" />
+	<xacro:property name="std_ixx" value="100" />
+	<xacro:property name="std_ixy" value="0" />
+	<xacro:property name="std_ixz" value="0" />
+	<xacro:property name="std_iyy" value="100" />
+	<xacro:property name="std_iyz" value="0" />
+	<xacro:property name="std_izz" value="100" />
+	<xacro:macro name="default_inertia" params="mass">
 		<inertial>
 			<origin />
-			<mass value="2.5"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+			<mass value="${mass}"/>
+			<inertia ixx="${std_ixx}"  ixy="${std_ixy}"  ixz="${std_ixz}" iyy="${std_iyy}" iyz="${std_iyz}" izz="${std_izz}" />
 		</inertial>
+	</xacro:macro>
+
+	<link name="base_link">
+		<xacro:default_inertia mass="${weight_box}"/>
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
@@ -25,11 +48,7 @@
 	</link>
 
 	<link name="axe_front_left">
-		<inertial>
-			<origin />
-			<mass value="0.03"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_axe}"/>
 		<visual>
 			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
 			<geometry>
@@ -48,11 +67,7 @@
 		</collision>
 	</link>
 	<link name="axe_front_right">
-		<inertial>
-			<origin />
-			<mass value="0.03"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_axe}"/>
 		<visual>
 			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
 			<geometry>
@@ -69,11 +84,7 @@
 		</collision>
 	</link>
 	<link name="axe_back_right">
-		<inertial>
-			<origin />
-			<mass value="0.03"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_axe}"/>
 		<visual>
 			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
 			<geometry>
@@ -90,11 +101,7 @@
 		</collision>
 	</link>
 	<link name="axe_back_left">
-		<inertial>
-			<origin />
-			<mass value="0.03"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_axe}"/>
 		<visual>
 			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
 			<geometry>
@@ -111,15 +118,11 @@
 		</collision>
 	</link>
 	<link name="wheel_front_left">
-		<inertial>
-			<origin />
-			<mass value="0.02"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_wheel}"/>
 		<visual>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 			<material name="white" />
 		</visual>
@@ -127,20 +130,16 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 		</collision>
 	</link>
 	<link name="wheel_front_right">
-		<inertial>
-			<origin />
-			<mass value="0.02"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_wheel}"/>
 		<visual>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 			<material name="white" />
 		</visual>
@@ -148,20 +147,16 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 		</collision>
 	</link>
 	<link name="wheel_back_right">
-		<inertial>
-			<origin />
-			<mass value="0.02"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_wheel}"/>
 		<visual>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 			<material name="white" />
 		</visual>
@@ -169,20 +164,16 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 		</collision>
 	</link>
 	<link name="wheel_back_left">
-		<inertial>
-			<origin />
-			<mass value="0.02"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_wheel}"/>
 		<visual>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
 			</geometry>
 			<material name="white" />
 		</visual>
@@ -190,20 +181,16 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 1.57 0"/>
 			<geometry>
-				<cylinder length="0.045" radius="0.08"/>
+				<cylinder length="${length_wheel}" radius="0.08"/>
 			</geometry>
 		</collision>
 	</link>
 	<link name="LIDAR">
-		<inertial>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0.02"/>
-			<inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
-		</inertial>
+		<xacro:default_inertia mass="${weight_LIDAR}"/>
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0"/> <!-- angle de 55 = 0.96 rad-->
 			<geometry>
-				<cylinder length="0.06" radius="0.076"/>
+				<cylinder length="${length_LIDAR}" radius="${radius_LIDAR}"/>
 			</geometry>
 			<material name="black" />
 		</visual>
