@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="octanis1">
+
+	<!-- NAME OF THE ROBOT -->
+	<xacro:property name="name_robot" value="octanis1" />
+	<!-- POSITION CONSTANTS (only whose which can change) -->
+	<xacro:property name="length_LIDAR" value="0.06" />
+	<xacro:property name="radius_LIDAR" value="0.076" />
+	<xacro:property name="radius_wheel" value="0.08" />
+	<xacro:property name="length_wheel" value="0.045" />
+	<!-- INERTIAL CONSTANTS (because they can change) -->
+	<xacro:property name="weight_box" value="2.5" />
+	<xacro:property name="weight_LIDAR" value="0.2" />
+	<xacro:property name="weight_axe" value="0.3" />
+	<xacro:property name="weight_wheel" value="0.2" />
+	<xacro:property name="std_ixx" value="100" />
+	<xacro:property name="std_ixy" value="0" />
+	<xacro:property name="std_ixz" value="0" />
+	<xacro:property name="std_iyy" value="100" />
+	<xacro:property name="std_iyz" value="0" />
+	<xacro:property name="std_izz" value="100" />
+	<xacro:macro name="default_inertia" params="mass">
+		<inertial>
+			<origin />
+			<mass value="${mass}"/>
+			<inertia ixx="${std_ixx}"  ixy="${std_ixy}"  ixz="${std_ixz}" iyy="${std_iyy}" iyz="${std_iyz}" izz="${std_izz}" />
+		</inertial>
+	</xacro:macro>
+
+	<link name="base_link">
+		<xacro:default_inertia mass="${weight_box}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.32 0.32 0.16" />
+			</geometry>
+			<material name="yellow">
+        		<color rgba="0.97 0.79 0.2 1"/>
+        	</material>
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.32 0.32 0.16" />
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="axe_front_left">
+		<xacro:default_inertia mass="${weight_axe}"/>
+		<visual>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+			<material name="white">
+        		<color rgba="1 1 0.8 1"/>
+        	</material>
+		</visual>
+
+		<collision>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="axe_front_right">
+		<xacro:default_inertia mass="${weight_axe}"/>
+		<visual>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="axe_back_right">
+		<xacro:default_inertia mass="${weight_axe}"/>
+		<visual>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="axe_back_left">
+		<xacro:default_inertia mass="${weight_axe}"/>
+		<visual>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0.1175 -0.02" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.015 0.275 0.04" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_front_left">
+		<xacro:default_inertia mass="${weight_wheel}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_front_right">
+		<xacro:default_inertia mass="${weight_wheel}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_back_right">
+		<xacro:default_inertia mass="${weight_wheel}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="wheel_back_left">
+		<xacro:default_inertia mass="${weight_wheel}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+			</geometry>
+			<material name="white" />
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+			<geometry>
+				<cylinder length="${length_wheel}" radius="0.08"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="LIDAR">
+		<xacro:default_inertia mass="${weight_LIDAR}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/> <!-- angle de 55 = 0.96 rad-->
+			<geometry>
+				<cylinder length="${length_LIDAR}" radius="${radius_LIDAR}"/>
+			</geometry>
+			<material name="black" />
+		</visual>
+	</link>
+	<link name="IMU" />
+
+	<joint name="joint_axe_front_left" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_front_left" />
+		<origin xyz="-0.1675 0 -0.02" rpy="-0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_front_right" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_front_right" />
+		<origin xyz="0.1675 0 -0.02" rpy="-0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_back_right" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_back_right" />
+		<origin xyz="0.1825 0 -0.02" rpy="-2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_axe_back_left" type="continuous">
+		<parent link="base_link" />
+		<child link="axe_back_left" />
+		<origin xyz="-0.1825 0 -0.02" rpy="-2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_LIDAR" type="continuous">
+		<parent link="base_link" />
+		<child link="LIDAR" />
+		<origin xyz="0 0.12 0.04" rpy="-0.96 0 0" />
+		<axis xyz="0 0 1" />
+	</joint>
+
+	<joint name="joint_IMU" type="fixed">
+		<parent link="base_link" />
+		<child link="IMU" />
+		<origin xyz="0 0.09 0" rpy="0 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_front_left" type="continuous">
+		<parent link="axe_front_left" />
+		<child link="wheel_front_left" />
+		<origin xyz="-0.03 0.25 0" rpy="0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_front_right" type="continuous">
+		<parent link="axe_front_right" />
+		<child link="wheel_front_right" />
+		<origin xyz="0.03 0.25 0" rpy="0.93 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_back_right" type="continuous">
+		<parent link="axe_back_right" />
+		<child link="wheel_back_right" />
+		<origin xyz="0.03 0.25 0" rpy="2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_wheel_back_left" type="continuous">
+		<parent link="axe_back_left" />
+		<child link="wheel_back_left" />
+		<origin xyz="-0.03 0.25 0" rpy="2.21 0 0" />
+		<axis xyz="1 0 0" />
+	</joint>
+</robot>
