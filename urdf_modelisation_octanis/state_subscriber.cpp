@@ -15,9 +15,13 @@
 
 double axe_front_left = 0, axe_front_right = 0, axe_back_right = 0, axe_back_left = 0, wheel_front_left = 0, wheel_front_right = 0, wheel_back_right = 0, wheel_back_left = 0, LIDAR;
 
+/* I have done variables called 'memory' to store previous values of joints.*/
 // AFL = axe_front_left, ABL = axe_back_left, WFL = wheel_front_left, etc.
 double AFL_memory = 0, AFR_memory = 0, ABR_memory = 0, ABL_memory = 0, WFL_memory = 0, WFR_memory = 0, WBR_memory = 0, WBL_memory = 0, LIDAR_memory;
 
+/**
+ * this function store the values of the joint_states. You can add things to publish some of these values.
+ */
 void callback(const sensor_msgs::JointState & msg){
 	AFL_memory = axe_front_left;
 	AFR_memory = axe_front_right;
