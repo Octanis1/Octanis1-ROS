@@ -36,7 +36,7 @@ def talker():
 		hello_str.velocity = [rotAFL, rotAFR, rotABR, rotABL,rotWFL, rotWFR, rotWBR, rotWBL, rotLIDAR]
 		hello_str.effort = []
 		pub.publish(hello_str)
-		WFL, WFR, WBR, WBL= WFL+0.1, WFR+0.1, WBR+0.1, WBL+0.1
+		WFL, WFR, WBR, WBL= WFL+0.2, WFR+0.3, WBR+0.3, WBL+0.2
 		AFL, AFR, ABR, ABL, WFL, WFR, WBR, WBL, LIDAR, rotAFL, rotAFR, rotABR, rotABL, rotWFL, rotWFR, rotWBR, rotWBL, rotLIDAR=[i for i in check_radian([AFL, AFR, ABR, ABL, WFL, WFR, WBR, WBL, LIDAR])]
 		rate.sleep()
 
