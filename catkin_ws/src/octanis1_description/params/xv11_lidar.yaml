@@ -1,0 +1,4 @@
+# USB port
+port: /dev/ttyS1
+# Tf frame id
+frame_id: LIDAR
