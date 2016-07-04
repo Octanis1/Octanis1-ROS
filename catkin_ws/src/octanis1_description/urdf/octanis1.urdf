@@ -231,7 +231,7 @@
     <origin rpy="-2.21 0 0" xyz="-0.1825 0 -0.02"/>
     <axis xyz="1 0 0"/>
   </joint>
-  <joint name="joint_LIDAR" type="continuous">
+  <joint name="joint_LIDAR" type="fixed">
     <parent link="base_link"/>
     <child link="LIDAR"/>
     <origin rpy="-0.96 0 0" xyz="0 0.12 0.04"/>
