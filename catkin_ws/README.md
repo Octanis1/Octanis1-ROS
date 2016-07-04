@@ -1,5 +1,1 @@
-# Creation of the .urdf
-
-In this workspace you can find the *definition .urdf of the rover* and a parser which enables to read the file .urdf
-
-You can create the graph which representes every links of the definition .urdf of the rover.
+This is the main rover catkin workspace. To start a rover mission, get all the prerequisites, setup your env vars and build the workspace. Then run `roslaunch octanis1_description mission_auto.launch`.
