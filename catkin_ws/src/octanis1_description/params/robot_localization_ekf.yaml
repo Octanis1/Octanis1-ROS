@@ -24,7 +24,7 @@ acceleration_gains: [0.8, 0.0, 0.0, 0.0, 0.0, 0.9]
 deceleration_gains: [1.0, 0.0, 0.0, 0.0, 0.0, 1.0]
 
 imu0: imu/data
-imu0_config: [false, false, false,
+imu0_config: [false, false, true,
               true,  true,  true,
               false, false, false,
               true,  true,  true,
