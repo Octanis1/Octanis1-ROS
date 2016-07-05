@@ -7,4 +7,19 @@
     -->
 
   </node>
+
+  <!--  It produces an odometry message in coordinates that are consistent with your robot's world frame.   -->
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+      <param name="magnetic_declination_radians" value="0"/>
+      <param name="yaw_offset" value="0"/>
+      <remap from="/imu/data" to="/imu/data" />
+      <remap from="/gps/fix" to="/mavros/global_position/global" />
+      <remap from="/odometry/filtered" to="/odometry/filtered" />
+  </node>
+
+  <!-- Run another instance of a robot_localization state estimation node that fuses all sources of data, including the GPS. Set the world_frame parameter for this instance to the same value as the map_frame parameter.-->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_gps" clear_params="true">
+    <rosparam command="load" file="$(find octanis1_description)/params/robot_localization_ekf_gps.yaml" />
+  </node>
+
 </launch>
