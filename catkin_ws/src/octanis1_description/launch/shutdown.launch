@@ -1,0 +1,3 @@
+<launch>
+  <node name="shutdown_node" pkg="shutdown_node" type="shutdown.py" />
+</launch>
