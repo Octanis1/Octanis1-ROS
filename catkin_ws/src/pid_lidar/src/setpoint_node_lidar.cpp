@@ -49,17 +49,21 @@ int main(int argc, char **argv)
   }
 
   std_msgs::UInt16 setpoint;
-  setpoint.data = 1.0;
+  setpoint.data = 200;
   ros::Publisher setpoint_pub = setpoint_node.advertise<std_msgs::UInt16>("setpoint", 1);
 
   ros::Rate loop_rate(0.2);   // change setpoint every 5 seconds
+
+  //
+  int delta_rpm = 30;
 
   while (ros::ok())
   {
     ros::spinOnce();
 
     setpoint_pub.publish(setpoint);     // publish twice so graph gets it as a step
-    setpoint.data = 0 - setpoint.data;
+    delta_rpm = 0 - delta_rpm;
+    setpoint.data = setpoint.data + delta_rpm;
     setpoint_pub.publish(setpoint);
 
     loop_rate.sleep();

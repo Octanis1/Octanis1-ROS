@@ -68,6 +68,7 @@ include_directories(include
 ##add_executable(controller src/controller.cpp)
 add_executable(controller_lidar src/controller_lidar.cpp) ## Added
 ##add_executable(plant_sim src/plant_sim.cpp)
+##add_executable(plant_sim_lidar src/plant_sim_lidar.cpp)
 ##add_executable(setpoint_node src/setpoint_node.cpp)
 add_executable(setpoint_node_lidar src/setpoint_node_lidar.cpp) ## Added
 ##add_executable(sim_time src/sim_time.cpp)
@@ -75,6 +76,7 @@ add_executable(setpoint_node_lidar src/setpoint_node_lidar.cpp) ## Added
 ##add_dependencies(controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater ${PROJECT_NAME}_gencfg)
 add_dependencies(controller_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater ${PROJECT_NAME}_gencfg)
 ##add_dependencies(plant_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
+##add_dependencies(plant_sim_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
 ##add_dependencies(setpoint_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
 add_dependencies(setpoint_node_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
 ##add_dependencies(sim_time ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
@@ -85,6 +87,7 @@ add_dependencies(setpoint_node_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catki
 ##target_link_libraries(controller ${catkin_LIBRARIES})
 target_link_libraries(controller_lidar ${catkin_LIBRARIES})
 ##target_link_libraries(plant_sim ${catkin_LIBRARIES})
+##target_link_libraries(plant_sim_lidar ${catkin_LIBRARIES})
 ##target_link_libraries(setpoint_node ${catkin_LIBRARIES})
 target_link_libraries(setpoint_node_lidar ${catkin_LIBRARIES})
 ##target_link_libraries(sim_time ${catkin_LIBRARIES})
@@ -104,7 +107,7 @@ target_link_libraries(setpoint_node_lidar ${catkin_LIBRARIES})
 # )
 
 ## Mark executables and/or libraries for installation
-##install(TARGETS controller controller_lidar plant_sim
+##install(TARGETS controller plant_sim
 install(TARGETS controller_lidar
 #  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

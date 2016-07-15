@@ -283,8 +283,8 @@ int main(int argc, char **argv)
   control_effort_pub = node.advertise<std_msgs::Float64>(topic_from_controller, 1);
 
   ros::Subscriber sub = node.subscribe(topic_from_plant, 1, plant_state_callback );
-  // COmment for now not to have changes. We want constant rpms
-  //ros::Subscriber setpoint_sub = node.subscribe(setpoint_topic, 1, setpoint_callback );
+  // Comment for now not to have changes. We want constant rpms
+  ros::Subscriber setpoint_sub = node.subscribe(setpoint_topic, 1, setpoint_callback );
   ros::Subscriber pid_enabled_sub = node.subscribe("pid_enable", 1, pid_enable_callback );
 
 
