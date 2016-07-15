@@ -8,7 +8,7 @@
 	<arg name="tgt_system" />
 	<arg name="tgt_component" />
 	<arg name="pluginlists_yaml" />
-	<arg name="config_yaml" />
+	<arg name="config_yaml" value="../params/mavros_config.yaml" />
 	<arg name="log_output" default="screen" />
 
 	<node pkg="mavros" type="mavros_node" name="mavros" required="true" clear_params="true" output="$(arg log_output)">
