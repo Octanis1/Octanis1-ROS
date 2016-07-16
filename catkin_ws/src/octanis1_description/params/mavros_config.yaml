@@ -94,4 +94,3 @@ setpoint_position:
 # waypoint
 mission:
   pull_after_gcs: true  # update mission if gcs updates
-

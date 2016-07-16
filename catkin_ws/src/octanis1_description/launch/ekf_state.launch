@@ -5,12 +5,14 @@
 
   <!--  It produces an odometry message in coordinates that are consistent with your robot's world frame.   -->
   <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+
       <!-- update this to YOUR LOCATION -->
       <param name="magnetic_declination_radians" value="0.01745329252" /> 
       <param name="publish_filtered_gps" value="true" />
       <param name="yaw_offset" value="0" />
       <param name="delay" value="30" />
       
+      <remap from="/imu/data" to="/imu/data" />
       <remap from="/gps/fix" to="/mavros/global_position/global" />
       <remap from="/odometry/filtered" to="/odometry/filtered" />
   </node>
