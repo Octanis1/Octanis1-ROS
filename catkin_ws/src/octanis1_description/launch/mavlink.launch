@@ -1,11 +1,14 @@
 <launch>
-	<arg name="fcu_url" default="/dev/ttyS0:9600" />
+	<arg name="fcu_url" default="/dev/ttyS0:9600" /> 
+<!--	<arg name="fcu_url" default="udp://:14540@192.168.2.1:14557" /> -->
+        <arg name="gcs_url" default="udp://@192.168.2.1:14550" />
 	<arg name="tgt_system" default="25" />
 	<arg name="tgt_component" default="1" />
 	<arg name="log_output" default="screen" />
 
 	<node pkg="mavros" type="mavros_node" name="mavros" required="true" clear_params="true" output="$(arg log_output)">
 		<param name="fcu_url" value="$(arg fcu_url)" />
+		<param name="gcs_url" value="$(arg gcs_url)" />
 		<param name="target_system_id" value="$(arg tgt_system)" />
 		<param name="target_component_id" value="$(arg tgt_component)" />
 	</node>
