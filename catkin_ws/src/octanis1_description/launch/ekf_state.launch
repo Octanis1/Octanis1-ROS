@@ -16,7 +16,7 @@
       <param name="wait_for_datum" value="false"/>
       <param name="delay" value="3"/>
       <param name="broadcast_utm_transform" value="false"/>
-      <param name="use_odometry_yaw" value="true" />
+      <param name="use_odometry_yaw" value="false" />
       <remap from="/odometry/filtered" to="/odometry/filtered/global" />
       <remap from="/gps/fix" to="/mavros/global_position/raw/fix" /> 
       <remap from="/imu/data" to="/imu/raw" />
