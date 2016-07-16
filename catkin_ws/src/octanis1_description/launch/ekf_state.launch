@@ -6,15 +6,20 @@
   </node>
 
   <!--  It produces an odometry message in coordinates that are consistent with your robot's world frame.   -->
-  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" respawn="true">
       <!-- update this to YOUR LOCATION -->
-      <!-- <param name="magnetic_declination_radians" value="0.01745329252" /> -->
+      <param name="magnetic_declination_radians" value="0.017453292" />
       <param name="publish_filtered_gps" value="true" />
-      <param name="yaw_offset" value="0" />
-      <param name="frequency" value="2" />
-      <param name="debug" value="true" />
+      <param name="yaw_offset" value="1.570796327"/>
+      <param name="frequency" value="10" />
+      <param name="zero_altitude" value="false"/>
+      <param name="wait_for_datum" value="false"/>
+      <param name="delay" value="3"/>
+      <param name="broadcast_utm_transform" value="false"/>
+      <param name="use_odometry_yaw" value="true" />
       <remap from="/odometry/filtered" to="/odometry/filtered/global" />
-      <remap from="/gps/fix" to="/mavros/global_position/raw/fix" />
+      <remap from="/gps/fix" to="/mavros/global_position/raw/fix" /> 
+      <remap from="/imu/data" to="/imu/raw" />
   </node>
 
   <!-- Run another instance of a robot_localization state estimation node that fuses all sources of data, including the GPS. Set the world_frame parameter for this instance to the same value as the map_frame parameter.-->
