@@ -5,12 +5,14 @@
 	<arg name="tgt_system" default="25" />
 	<arg name="tgt_component" default="1" />
 	<arg name="log_output" default="screen" />
+	<arg name="config_yaml" value="$(find octanis1_description)/params/mavros_config.yaml" />
 
 	<node pkg="mavros" type="mavros_node" name="mavros" required="true" clear_params="true" output="$(arg log_output)">
 		<param name="fcu_url" value="$(arg fcu_url)" />
 		<param name="gcs_url" value="$(arg gcs_url)" />
 		<param name="target_system_id" value="$(arg tgt_system)" />
 		<param name="target_component_id" value="$(arg tgt_component)" />
+                <rosparam command="load" file="$(arg config_yaml)" />
 	</node>
 
 </launch>
