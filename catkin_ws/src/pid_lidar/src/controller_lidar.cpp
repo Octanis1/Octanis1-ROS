@@ -37,9 +37,9 @@
 // stabilize it.
 
 #include <pid/controller_lidar.h>
-#include <pid/PidConfig.h>
+//#include <pid/PidConfig.h>
 
-#include <dynamic_reconfigure/server.h>
+//#include <dynamic_reconfigure/server.h>
 #include <ros/time.h>
 
 void setpoint_callback(const std_msgs::UInt16& setpoint_msg)
@@ -173,9 +173,9 @@ void pid_enable_callback(const std_msgs::Bool& pid_enable_msg)
   pid_enabled = pid_enable_msg.data;
 }
 
-bool first_reconfig = true;
+//bool first_reconfig = true;
 
-void reconfigure_callback(pid::PidConfig &config, uint32_t level)
+/*void reconfigure_callback(pid::PidConfig &config, uint32_t level)
 {
   if (first_reconfig)
   {
@@ -187,7 +187,7 @@ void reconfigure_callback(pid::PidConfig &config, uint32_t level)
   Ki = config.Ki * config.Ki_scale;
   Kd = config.Kd * config.Kd_scale;
   ROS_INFO("Pid reconfigure request: Kp: %f, Ki: %f, Kd: %f", Kp, Ki, Kd);
-}
+}*/
 
 void get_pid_diag_status(diagnostic_updater::DiagnosticStatusWrapper& pid_diag_status)
 {
@@ -295,7 +295,6 @@ int main(int argc, char **argv)
   config_server.setCallback(f);
 */
 
-/*
   // initialize diagnostics
   diags = new PidControllerDiags;
 
@@ -305,7 +304,6 @@ int main(int argc, char **argv)
   diags->diag_updater.setHardwareID(node_name);
   diags->diag_updater.add(diags->freq_status);
   diags->diag_updater.add("PID status", get_pid_diag_status);
-*/
 
   // Respond to inputs until shut down
   ros::spin();
