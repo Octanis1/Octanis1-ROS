@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/rover/Octanis1-ROS/catkin_ws/devel/setup.sh
+    local-name: /home/viki/octanis/Octanis1-ROS/catkin_ws/devel/setup.sh
