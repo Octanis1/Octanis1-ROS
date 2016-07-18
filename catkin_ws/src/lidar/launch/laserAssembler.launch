@@ -1,0 +1,11 @@
+<launch>
+ <!-- assemble pointcloud into a full world view -->
+  <node pkg="laser_assembler" type="point_cloud_assembler" output="screen"  name="point_cloud_assembler">
+    <remap from="cloud" to="/cloud"/>
+    <param name="tf_cache_time_secs" type="double" value="10.0" />
+    <param name="tf_tolerance_secs" type="double" value="0.0" />
+    <param name="max_clouds" type="int" value="400" />
+    <param name="ignore_laser_skew" type="bool" value="true" />
+    <param name="fixed_frame" type="string" value="base_link" />
+  </node>
+</launch>
