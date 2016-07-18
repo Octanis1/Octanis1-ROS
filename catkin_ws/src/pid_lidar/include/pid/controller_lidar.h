@@ -54,7 +54,7 @@
 // Primary PID controller input & output variables
 double plant_state;                 // current output of plant
 double control_effort;              // output of pid controller
-double setpoint = 180;                // desired output of plant
+double setpoint = 190;                // desired output of plant
 bool pid_enabled = true;            // PID is enabled to run
 
 ros::Time prev_time;
@@ -97,7 +97,7 @@ std::string topic_from_plant;
 std::string setpoint_topic;
 std::string node_name = "pid_node";
 
-std_msgs::Float64 control_msg;
+std_msgs::UInt16 control_msg;
 std_msgs::Float64 state_msg;
 
 // Diagnostic objects
