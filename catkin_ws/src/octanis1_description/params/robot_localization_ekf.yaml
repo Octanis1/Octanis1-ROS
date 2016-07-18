@@ -1,18 +1,17 @@
-frequency: 30
+frequency: 5
 sensor_timeout: 0.1
 transform_time_offset: 0.0
 two_d_mode: false
 print_diagnostics: true
 
 debug: false
-debug_out_file: /path/to/debug/file.txt
 
 #If your system does not have a map_frame, just remove it, and make sure world_frame is set to the value of odom_frame. 
-#map_frame: map 
-
+map_frame: map 
 odom_frame: odom
 base_link_frame: base_link
 world_frame: odom
+
 
 use_control: true
 stamped_control: false
@@ -20,21 +19,37 @@ control_timeout: 0.2
 control_config: [true, false, false, false, false, true]
 acceleration_limits: [1.8, 0.0, 0.0, 0.0, 0.0, 3.4]
 deceleration_limits: [1.8, 0.0, 0.0, 0.0, 0.0, 4.5]
-acceleration_gains: [0.8, 0.0, 0.0, 0.0, 0.0, 0.9]
+acceleration_gains: [1.0, 0.0, 0.0, 0.0, 0.0, 1.0]
 deceleration_gains: [1.0, 0.0, 0.0, 0.0, 0.0, 1.0]
 
+
 imu0: imu/data
-imu0_config: [false, false, true,
+imu0_config: [false, false, false,
               true,  true,  true,
-              false, false, false,
+              true, true, true,
               true,  true,  true,
               true,  true,  true]
-imu0_nodelay: false
-imu0_queue_size: 5
+imu0_nodelay: true
+imu0_queue_size: 10
+imu0_remove_gravitational_acceleration: true #imu must provide orientation
+imu0_differential: false
 imu0_pose_rejection_threshold: 0.8
 imu0_twist_rejection_threshold: 0.8
 imu0_linear_acceleration_rejection_threshold: 0.8
 
+imu1: imu/raw
+imu1_config: [false, false, false,
+              false,  false,  false,
+              true, true, true,
+              false,  false,  false,
+              true,  true,  true]
+imu1_nodelay: false
+imu1_queue_size: 10
+imu1_remove_gravitational_acceleration: false
+imu1_differential: false
+imu1_pose_rejection_threshold: 0.8
+imu1_twist_rejection_threshold: 0.8
+imu1_linear_acceleration_rejection_threshold: 0.8
 
 
 process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,

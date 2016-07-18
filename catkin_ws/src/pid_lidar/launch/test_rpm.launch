@@ -26,11 +26,20 @@
     <!--
     <node name="setpoint_node_lidar" pkg="pid" type="setpoint_node_lidar" output="screen" />
     -->
+<<<<<<< HEAD
     <!--
+=======
+<!--
+>>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
     <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot"
     args="/control_effort/data /state/data /setpoint/data" />
 
     <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
+<<<<<<< HEAD
     -->
 -->
+=======
+-->
+
+>>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
 </launch>

@@ -1,4 +1,5 @@
 <launch>
   <param name="robot_description" command="cat $(find octanis1_description)/urdf/octanis1.urdf" />
+  <param name="publish_frequency" value="2.0" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 </launch>
