@@ -47,18 +47,18 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
+# add_message_files(
+#   FILES
 #   Message1.msg
 #   Message2.msg
- )
+# )
 
 ## Generate services in the 'srv' folder
- add_service_files(
+# add_service_files(
 #   FILES
 #   Service1.srv
 #   Service2.srv
- )
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -168,18 +168,14 @@ include_directories(
 
 add_executable(point2cloud src/point2cloud.cpp)
 add_dependencies(point2cloud lidar_generate_messages_cpp)
-target_link_libraries(point2cloud ${catkin_LIBRARIES} -L/opt/ros/indigo/lib -ltf)
+target_link_libraries(point2cloud ${catkin_LIBRARIES} -L/opt/ros/kinetic/lib -ltf)
 
 add_executable(assemblecloud src/assemblecloud.cpp)
 add_dependencies(assemblecloud lidar_generate_messages_cpp)
-target_link_libraries(assemblecloud ${catkin_LIBRARIES} -L/opt/ros/indigo/lib -ltf)
-
-#add_executable(caca src/caca.cpp)
-#add_dependencies(caca lidar_generate_messages_cpp)
-#target_link_libraries(caca ${catkin_LIBRARIES} -L/opt/ros/indigo/lib -ltf)
+target_link_libraries(assemblecloud ${catkin_LIBRARIES} )
 
 add_executable(periodic_snapshotter src/periodic_snapshotter.cpp)
 add_dependencies(periodic_snapshotter lidar_generate_messages_cpp)
-target_link_libraries(periodic_snapshotter ${catkin_LIBRARIES} -L/opt/ros/indigo/lib -ltf)
+target_link_libraries(periodic_snapshotter ${catkin_LIBRARIES} )
 
 
