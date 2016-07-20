@@ -280,7 +280,7 @@ int main(int argc, char **argv)
   }
 
   // instantiate publishers & subscribers
-  control_effort_pub = node.advertise<std_msgs::UInt16>(topic_from_controller, 1);
+  control_effort_pub = node.advertise<std_msgs::Float64>(topic_from_controller, 1);
 
   ros::Subscriber sub = node.subscribe(topic_from_plant, 1, plant_state_callback );
   // Comment for now not to have changes. We want constant rpms
