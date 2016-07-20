@@ -17,8 +17,6 @@ def motor_input_callback(v):
     i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
     i2c.open(0x0f)  # The slave device address is 0x0f
 
-    
-
     # If we want to write to some register
     # Convert float 64 to hexa 
     # v_hex = float_to_hex(v.data)
@@ -39,6 +37,21 @@ def i2c_listener():
 	rospy.spin()
 
 if __name__ == '__main__':
+
+	# Start motor (before controling it, it needs to be already turning)
+	i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
+	i2c.open(0x0f)  # The slave device address is 0x0f
+
+	# Start with 5.5V
+	v_hex = hex(128)
+	i2c.write([0x82, v_hex])  # Write v_hex to register 0x82
+		
+	time.sleep(0.01)
+    	# Set direction
+    	i2c.write(0xaa, 0b1010)
+
+	i2c.close()  # End communication with slave device
+	
 	while(1):
 		i2c_listener()
 
