@@ -2,6 +2,7 @@
 
 import os
 import rospy
+import time
 from std_msgs.msg import Float64, UInt16
 from pyA20 import i2c
 
@@ -16,11 +17,17 @@ def motor_input_callback(v):
     i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
     i2c.open(0x0f)  # The slave device address is 0x0f
 
+    
+
     # If we want to write to some register
     # Convert float 64 to hexa 
     # v_hex = float_to_hex(v.data)
     v_hex = hex(v.data)
     i2c.write([0x82, v_hex])  # Write v_hex to register 0x82
+
+    time.sleep(0.01)
+    # Set direction
+    i2c.write(0xaa, 0b1010)
     
     i2c.close()  # End communication with slave device
 

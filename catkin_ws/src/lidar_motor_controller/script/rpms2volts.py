@@ -9,7 +9,6 @@ from std_msgs.msg import Float64
 def convert_to_volts_callback(r):
 
     new_rpms = float(current_rpms) + r.data
-    print("new_rpms %d", new_rpms)
     
     # We receive the information of the control_effort topic that indicates the value in rpms. Convert it into volts
     # We have in normal conditions : 3V -> 190 rpms
@@ -27,6 +26,8 @@ def convert_to_volts_callback(r):
         pwm_dc = pwm_dc_max
     elif pwm_dc < pwm_dc_min:
         pwm_dc = pwm_dc_min
+
+    # >>>>>>>>> CONVERT INTO UINT16 FORMAT
 
     # Publish to motor_input (will then be transmitted via i2c to motor)
     pub = rospy.Publisher('motor_input', UInt16, queue_size=10)   
