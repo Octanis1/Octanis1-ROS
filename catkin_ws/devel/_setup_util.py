@@ -52,10 +52,9 @@ IS_WINDOWS = (system == 'Windows')
 # subfolder of workspace prepended to CMAKE_PREFIX_PATH
 ENV_VAR_SUBFOLDERS = {
     'CMAKE_PREFIX_PATH': '',
-    'CPATH': 'include',
-    'LD_LIBRARY_PATH' if not IS_DARWIN else 'DYLD_LIBRARY_PATH': ['lib', os.path.join('lib', 'x86_64-linux-gnu')],
+    'LD_LIBRARY_PATH' if not IS_DARWIN else 'DYLD_LIBRARY_PATH': ['lib', os.path.join('lib', 'arm-linux-gnueabihf')],
     'PATH': 'bin',
-    'PKG_CONFIG_PATH': [os.path.join('lib', 'pkgconfig'), os.path.join('lib', 'x86_64-linux-gnu', 'pkgconfig')],
+    'PKG_CONFIG_PATH': [os.path.join('lib', 'pkgconfig'), os.path.join('lib', 'arm-linux-gnueabihf', 'pkgconfig')],
     'PYTHONPATH': 'lib/python2.7/dist-packages',
 }
 
@@ -263,7 +262,11 @@ if __name__ == '__main__':
             sys.exit(1)
 
         # environment at generation time
+<<<<<<< HEAD
         CMAKE_PREFIX_PATH = '/opt/ros/indigo'.split(';')
+=======
+        CMAKE_PREFIX_PATH = '/opt/ros/kinetic'.split(';')
+>>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
         # prepend current workspace if not already part of CPP
         base_path = os.path.dirname(__file__)
         if base_path not in CMAKE_PREFIX_PATH:

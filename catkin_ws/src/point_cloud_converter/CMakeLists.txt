@@ -164,4 +164,4 @@ include_directories(
 
 add_executable(converter src/converter.cpp)
 add_dependencies(converter lidar_generate_messages_cpp)
-target_link_libraries(converter ${catkin_LIBRARIES} -L/opt/ros/indigo/lib -ltf)
+target_link_libraries(converter ${catkin_LIBRARIES} )
