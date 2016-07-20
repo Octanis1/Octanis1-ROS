@@ -14,7 +14,7 @@ from mavros.utils import *
 
 def motor_input_callback(v):
     #  >>>>>>>>>>>>>>> (Chnage port maybe)
-    i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
+    #i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
     i2c.open(0x0f)  # The slave device address is 0x0f
 
     # If we want to write to some register
@@ -40,11 +40,12 @@ if __name__ == '__main__':
 
 	# Start motor (before controling it, it needs to be already turning)
 	i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
+	time.sleep(0.1)
+	
 	i2c.open(0x0f)  # The slave device address is 0x0f
 
 	# Start with 5.5V
-	v_hex = hex(128)
-	i2c.write([0x82, v_hex])  # Write v_hex to register 0x82
+	i2c.write([0x82, 0x80])  # Write 128 to register 0x82
 		
 	time.sleep(0.01)
     	# Set direction
