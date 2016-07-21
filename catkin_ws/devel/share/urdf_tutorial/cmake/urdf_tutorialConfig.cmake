@@ -67,14 +67,14 @@ set(urdf_tutorial_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(urdf_tutorial_SOURCE_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/src/modelisation_rviz)
-  set(urdf_tutorial_DEVEL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/devel)
+  set(urdf_tutorial_SOURCE_PREFIX /home/rover/Octanis1-ROS/catkin_ws/src/modelisation_rviz)
+  set(urdf_tutorial_DEVEL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/devel)
   set(urdf_tutorial_INSTALL_PREFIX "")
   set(urdf_tutorial_PREFIX ${urdf_tutorial_DEVEL_PREFIX})
 else()
   set(urdf_tutorial_SOURCE_PREFIX "")
   set(urdf_tutorial_DEVEL_PREFIX "")
-  set(urdf_tutorial_INSTALL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/install)
+  set(urdf_tutorial_INSTALL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/install)
   set(urdf_tutorial_PREFIX ${urdf_tutorial_INSTALL_PREFIX})
 endif()
 
@@ -103,7 +103,7 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'urdf_tutorial' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  Ask the maintainer 'David V. Lu!! <davidvlu@gmail.com>' to fix it.")
       endif()
     else()
-      message(FATAL_ERROR "Project 'urdf_tutorial' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/viki/octanis/Octanis1-ROS/catkin_ws/src/modelisation_rviz/${idir}'.  Ask the maintainer 'David V. Lu!! <davidvlu@gmail.com>' to fix it.")
+      message(FATAL_ERROR "Project 'urdf_tutorial' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/rover/Octanis1-ROS/catkin_ws/src/modelisation_rviz/${idir}'.  Ask the maintainer 'David V. Lu!! <davidvlu@gmail.com>' to fix it.")
     endif()
     _list_append_unique(urdf_tutorial_INCLUDE_DIRS ${include})
   endforeach()
@@ -122,11 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-<<<<<<< HEAD
-    foreach(path /home/viki/octanis/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/indigo/lib)
-=======
     foreach(path /home/rover/Octanis1-ROS/catkin_ws/devel/lib;/home/rover/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -166,12 +162,12 @@ foreach(depend ${depends})
   if(${count} EQUAL 1)
     # simple dependencies must only be find_package()-ed once
     if(NOT ${urdf_tutorial_dep}_FOUND)
-      find_package(${urdf_tutorial_dep} REQUIRED)
+      find_package(${urdf_tutorial_dep} REQUIRED NO_MODULE)
     endif()
   else()
     # dependencies with components must be find_package()-ed again
     list(REMOVE_AT depend_list 0)
-    find_package(${urdf_tutorial_dep} REQUIRED ${depend_list})
+    find_package(${urdf_tutorial_dep} REQUIRED NO_MODULE ${depend_list})
   endif()
   _list_append_unique(urdf_tutorial_INCLUDE_DIRS ${${urdf_tutorial_dep}_INCLUDE_DIRS})
 

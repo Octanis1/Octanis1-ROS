@@ -67,23 +67,14 @@ set(attitude_mainboard_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-<<<<<<< HEAD
-  set(attitude_mainboard_SOURCE_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/src/attitude_mainboard)
-  set(attitude_mainboard_DEVEL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/devel)
-=======
   set(attitude_mainboard_SOURCE_PREFIX /home/rover/Octanis1-ROS/catkin_ws/src/attitude_mainboard)
   set(attitude_mainboard_DEVEL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/devel)
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
   set(attitude_mainboard_INSTALL_PREFIX "")
   set(attitude_mainboard_PREFIX ${attitude_mainboard_DEVEL_PREFIX})
 else()
   set(attitude_mainboard_SOURCE_PREFIX "")
   set(attitude_mainboard_DEVEL_PREFIX "")
-<<<<<<< HEAD
-  set(attitude_mainboard_INSTALL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/install)
-=======
   set(attitude_mainboard_INSTALL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/install)
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
   set(attitude_mainboard_PREFIX ${attitude_mainboard_INSTALL_PREFIX})
 endif()
 
@@ -112,11 +103,7 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'attitude_mainboard' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  Ask the maintainer 'anaroldan <aroldan@protonmail.ch>' to fix it.")
       endif()
     else()
-<<<<<<< HEAD
-      message(FATAL_ERROR "Project 'attitude_mainboard' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/viki/octanis/Octanis1-ROS/catkin_ws/src/attitude_mainboard/${idir}'.  Ask the maintainer 'anaroldan <aroldan@protonmail.ch>' to fix it.")
-=======
       message(FATAL_ERROR "Project 'attitude_mainboard' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/rover/Octanis1-ROS/catkin_ws/src/attitude_mainboard/${idir}'.  Ask the maintainer 'anaroldan <aroldan@protonmail.ch>' to fix it.")
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
     endif()
     _list_append_unique(attitude_mainboard_INCLUDE_DIRS ${include})
   endforeach()
@@ -135,11 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-<<<<<<< HEAD
-    foreach(path /home/viki/octanis/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/indigo/lib)
-=======
     foreach(path /home/rover/Octanis1-ROS/catkin_ws/devel/lib;/home/rover/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -179,20 +162,12 @@ foreach(depend ${depends})
   if(${count} EQUAL 1)
     # simple dependencies must only be find_package()-ed once
     if(NOT ${attitude_mainboard_dep}_FOUND)
-<<<<<<< HEAD
-      find_package(${attitude_mainboard_dep} REQUIRED)
-=======
       find_package(${attitude_mainboard_dep} REQUIRED NO_MODULE)
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
     endif()
   else()
     # dependencies with components must be find_package()-ed again
     list(REMOVE_AT depend_list 0)
-<<<<<<< HEAD
-    find_package(${attitude_mainboard_dep} REQUIRED ${depend_list})
-=======
     find_package(${attitude_mainboard_dep} REQUIRED NO_MODULE ${depend_list})
->>>>>>> 0f1b9935696db986da161e2fe1e388144a17ab8d
   endif()
   _list_append_unique(attitude_mainboard_INCLUDE_DIRS ${${attitude_mainboard_dep}_INCLUDE_DIRS})
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $HOME/catkin_ws
+cd $HOME/Octanis1-ROS/catkin_ws
 xterm -hold -e "rosbag play --clock src/lidar/LIDAR_IMU_TF_MAVLINK_OLIMEX_2016-07-04-21-55-39.bag"&  
 xterm -hold -e "source ./devel/setup.bash ; roslaunch lidar lidar.launch"&
 sleep 2

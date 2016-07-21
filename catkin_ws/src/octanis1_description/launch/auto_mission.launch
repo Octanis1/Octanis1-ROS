@@ -8,6 +8,8 @@
   <!-- Run mavlink connection to mainboard -->
   <include file="$(find octanis1_description)/launch/mavlink.launch"/>
 
+  <!-- Run camera launch file to launch the camera -->
+  <include file="$(find octanis1_description)/launch/camera.launch"/>
 
   <!-- Run Bosch BNO055 IMU Driver -->
   <arg name="bosch_config_file" default="$(find octanis1_description)/params/imu_bosch.yaml"/> 
