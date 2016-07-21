@@ -2,6 +2,7 @@
 
 import os
 import rospy
+import time
 from std_msgs.msg import Float64, UInt16
 from pyA20 import i2c
 
@@ -13,7 +14,7 @@ from mavros.utils import *
 
 def motor_input_callback(v):
     #  >>>>>>>>>>>>>>> (Chnage port maybe)
-    i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
+    #i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
     i2c.open(0x0f)  # The slave device address is 0x0f
 
     # If we want to write to some register
@@ -21,6 +22,10 @@ def motor_input_callback(v):
     # v_hex = float_to_hex(v.data)
     v_hex = hex(v.data)
     i2c.write([0x82, v_hex])  # Write v_hex to register 0x82
+
+    time.sleep(0.01)
+    # Set direction
+    i2c.write(0xaa, 0b1010)
     
     i2c.close()  # End communication with slave device
 
@@ -32,6 +37,26 @@ def i2c_listener():
 	rospy.spin()
 
 if __name__ == '__main__':
+
+	# Start motor (before controling it, it needs to be already turning)
+	i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
+	time.sleep(0.1)
+	
+	i2c.open(0x0f)  # The slave device address is 0x0f
+	
+
+	i2c.write([0x82]) #Set address at 0xAA register
+	value = i2c.read(1) #Read 1 byte with start address 0xAA
+	print(value)
+	# Start with 5.5V
+	i2c.write([0x82, 0x80])  # Write 128 to register 0x82
+		
+	time.sleep(0.01)
+    	# Set direction
+    	i2c.write(0xaa, 0b1010)
+
+	i2c.close()  # End communication with slave device
+	
 	while(1):
 		i2c_listener()
 
