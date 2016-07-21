@@ -2,7 +2,8 @@
 
 import os
 import rospy
-import time
+#from time import sleep
+
 from std_msgs.msg import Float64, UInt16
 from pyA20 import i2c
 
@@ -22,12 +23,18 @@ def motor_input_callback(v):
     i2c.write([0x82, v_hex])  # Write v_hex to register 0x82
     print(v_hex)
 
-    # time.sleep(1.0/100.0)
-    # Set direction
-    i2c.write([0xaa, 0b1010])
-    
-    i2c.close()  # End communication with slave device
+    #d = rospy.Duration(1, 0)
+    #rospy.sleep(d)
+    i=0
+    while (i < 10000):
+    	pass
+    	i += 1
 
+    # Set direction
+    i2c.write([0xaa, 0x0a])
+
+    i2c.close()  # End communication with slave device
+    print("closed")
 
 def i2c_listener():
 	rospy.init_node('i2c_listener', anonymous=True)
@@ -39,21 +46,31 @@ if __name__ == '__main__':
 
 	# Start motor (before controling it, it needs to be already turning)
 	i2c.init("/dev/i2c-2")  # Initialize module to use /dev/i2c-2
-	# time.sleep(1.0/100.0)
-	
+	#rospy.sleep(0.01)
+
+	i=0
+	while (i < 10000):
+            pass
+            i += 1
+
 	i2c.open(0x0f)  # The slave device address is 0x0f
-	
+
 	# Start with 5.5V
-	i2c.write([0x82, 0x80])  # Write 128 to register 0x82
- 		
-	# time.sleep(0.01)
+	i2c.write([0x82, 0x60])  # Write xx to register 0x82
+
+	#rospy.sleep(0.01)
+        i=0
+	while (i < 10000):
+            pass
+            i += 1
+
     	# Set direction
-    	i2c.write([0xAA, 0b1010])
+    	i2c.write([0xAA, 0x0a])
 
 	i2c.close()  # End communication with slave device
-	
+
 	# while (1):
         while not rospy.is_shutdown():
 		i2c_listener()
 
-	
+

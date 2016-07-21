@@ -69,20 +69,12 @@ set(pid_CONFIG_INCLUDED TRUE)
 if("TRUE" STREQUAL "TRUE")
   set(pid_SOURCE_PREFIX /home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar)
   set(pid_DEVEL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/devel)
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
   set(pid_INSTALL_PREFIX "")
   set(pid_PREFIX ${pid_DEVEL_PREFIX})
 else()
   set(pid_SOURCE_PREFIX "")
   set(pid_DEVEL_PREFIX "")
   set(pid_INSTALL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/install)
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
   set(pid_PREFIX ${pid_INSTALL_PREFIX})
 endif()
 
@@ -102,10 +94,6 @@ set(pid_FOUND_CATKIN_PROJECT TRUE)
 if(NOT "/home/rover/Octanis1-ROS/catkin_ws/devel/include;/home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar/include " STREQUAL " ")
   set(pid_INCLUDE_DIRS "")
   set(_include_dirs "/home/rover/Octanis1-ROS/catkin_ws/devel/include;/home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar/include")
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
@@ -116,10 +104,6 @@ if(NOT "/home/rover/Octanis1-ROS/catkin_ws/devel/include;/home/rover/Octanis1-RO
       endif()
     else()
       message(FATAL_ERROR "Project 'pid' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar/${idir}'.  Ask the maintainer 'Andy Zelenak <andyz@utexas.edu>' to fix it.")
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
     endif()
     _list_append_unique(pid_INCLUDE_DIRS ${include})
   endforeach()
@@ -138,15 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-<<<<<<< HEAD
-    foreach(path /home/rover/Octanis1-ROS/catkin_ws/devel/lib;/home/rover/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
-=======
-<<<<<<< HEAD
-    foreach(path /home/viki/octanis/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/indigo/lib)
-=======
     foreach(path /home/rover/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -170,10 +146,6 @@ foreach(library ${libraries})
 endforeach()
 
 set(pid_EXPORTED_TARGETS "pid_gencfg;pid_generate_messages_cpp;pid_generate_messages_eus;pid_generate_messages_lisp;pid_generate_messages_nodejs;pid_generate_messages_py")
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${pid_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -191,19 +163,11 @@ foreach(depend ${depends})
     # simple dependencies must only be find_package()-ed once
     if(NOT ${pid_dep}_FOUND)
       find_package(${pid_dep} REQUIRED NO_MODULE)
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
     endif()
   else()
     # dependencies with components must be find_package()-ed again
     list(REMOVE_AT depend_list 0)
     find_package(${pid_dep} REQUIRED NO_MODULE ${depend_list})
-<<<<<<< HEAD
-=======
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
->>>>>>> b81c00cb244db67fe381c1a0d8e180b567a493d2
   endif()
   _list_append_unique(pid_INCLUDE_DIRS ${${pid_dep}_INCLUDE_DIRS})
 
