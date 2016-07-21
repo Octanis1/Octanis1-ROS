@@ -64,6 +64,6 @@ def rpms2volts():
 
 
 if __name__ == '__main__':
-    while(1):
+    while not rospy.is_shutdown():
 	current_rpms = 0
         rpms2volts()
