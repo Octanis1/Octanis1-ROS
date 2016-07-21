@@ -45,11 +45,11 @@ if __name__ == '__main__':
 	i2c.open(0x0f)  # The slave device address is 0x0f
 	
 	# Start with 5.5V
-	i2c.write([0x82, 0x80])  # Write 128 to register 0x82
+	i2c.write([0x82, 0x40])  # Write 128 to register 0x82
 		
 	time.sleep(0.01)
     	# Set direction
-    	i2c.write(0xAA, 0b1010)
+    	i2c.write([0xAA, 0b1010])
 
 	i2c.close()  # End communication with slave device
 	
