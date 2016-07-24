@@ -174,8 +174,8 @@ void pid_enable_callback(const std_msgs::Bool& pid_enable_msg)
 }
 
 //bool first_reconfig = true;
-
-/*void reconfigure_callback(pid::PidConfig &config, uint32_t level)
+/*
+void reconfigure_callback(pid::PidConfig &config, uint32_t level)
 {
   if (first_reconfig)
   {
@@ -187,8 +187,8 @@ void pid_enable_callback(const std_msgs::Bool& pid_enable_msg)
   Ki = config.Ki * config.Ki_scale;
   Kd = config.Kd * config.Kd_scale;
   ROS_INFO("Pid reconfigure request: Kp: %f, Ki: %f, Kd: %f", Kp, Ki, Kd);
-}*/
-
+}
+*/
 void get_pid_diag_status(diagnostic_updater::DiagnosticStatusWrapper& pid_diag_status)
 {
   pid_diag_status.summary(diag_status);
@@ -288,12 +288,13 @@ int main(int argc, char **argv)
   ros::Subscriber pid_enabled_sub = node.subscribe("pid_enable", 1, pid_enable_callback );
 
 
-/*  // configure dynamic reconfiguration
+  // configure dynamic reconfiguration
+  /*
   dynamic_reconfigure::Server<pid::PidConfig> config_server;
   dynamic_reconfigure::Server<pid::PidConfig>::CallbackType f;
   f = boost::bind(&reconfigure_callback, _1, _2);
   config_server.setCallback(f);
-*/
+  */
 
   // initialize diagnostics
   diags = new PidControllerDiags;

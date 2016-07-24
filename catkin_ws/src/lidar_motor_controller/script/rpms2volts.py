@@ -7,13 +7,13 @@ from std_msgs.msg import Float64
 
 
 def convert_to_volts_callback(r):
-
+    print(r.data)
     new_rpms = float(current_rpms) + r.data
     
     # We receive the information of the control_effort topic that indicates the value in rpms. Convert it into volts
     # We have in normal conditions : 3V -> 190 rpms
     # Volts value should be in pwm duty cycle
-    pwm_dc0 = round(0.6*255) # 0.6 ?
+    pwm_dc0 = round(0.35*255) # 3V*255/11V
     rpm0 = 190
     
     pwm_dc = float(new_rpms)*(pwm_dc0/rpm0)
@@ -21,7 +21,7 @@ def convert_to_volts_callback(r):
     # Check that we don't exceed the maximum and minimum voltage
     # >>>>>>>>> Not sure of min value...
     pwm_dc_max = 255
-    pwm_dc_min = round(0.4*255) # 120 rpm
+    pwm_dc_min = round(0.1*255) # ? rpm
     if pwm_dc > pwm_dc_max:
         pwm_dc = pwm_dc_max
     elif pwm_dc < pwm_dc_min:
@@ -64,6 +64,5 @@ def rpms2volts():
 
 
 if __name__ == '__main__':
-    while(1):
-	current_rpms = 0
-        rpms2volts()
+   current_rpms = 0
+   rpms2volts()
