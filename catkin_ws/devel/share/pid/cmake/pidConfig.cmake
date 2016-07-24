@@ -67,23 +67,14 @@ set(pid_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-<<<<<<< HEAD
-  set(pid_SOURCE_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/src/pid_lidar)
-  set(pid_DEVEL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/devel)
-=======
   set(pid_SOURCE_PREFIX /home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar)
   set(pid_DEVEL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/devel)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
   set(pid_INSTALL_PREFIX "")
   set(pid_PREFIX ${pid_DEVEL_PREFIX})
 else()
   set(pid_SOURCE_PREFIX "")
   set(pid_DEVEL_PREFIX "")
-<<<<<<< HEAD
-  set(pid_INSTALL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/install)
-=======
   set(pid_INSTALL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/install)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
   set(pid_PREFIX ${pid_INSTALL_PREFIX})
 endif()
 
@@ -100,15 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(pid_FOUND_CATKIN_PROJECT TRUE)
 
-<<<<<<< HEAD
-if(NOT "/home/viki/octanis/Octanis1-ROS/catkin_ws/devel/include;/home/viki/octanis/Octanis1-ROS/catkin_ws/src/pid_lidar/include " STREQUAL " ")
-  set(pid_INCLUDE_DIRS "")
-  set(_include_dirs "/home/viki/octanis/Octanis1-ROS/catkin_ws/devel/include;/home/viki/octanis/Octanis1-ROS/catkin_ws/src/pid_lidar/include")
-=======
 if(NOT "/home/rover/Octanis1-ROS/catkin_ws/devel/include;/home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar/include " STREQUAL " ")
   set(pid_INCLUDE_DIRS "")
   set(_include_dirs "/home/rover/Octanis1-ROS/catkin_ws/devel/include;/home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar/include")
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
@@ -118,11 +103,7 @@ if(NOT "/home/rover/Octanis1-ROS/catkin_ws/devel/include;/home/rover/Octanis1-RO
         message(FATAL_ERROR "Project 'pid' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  Ask the maintainer 'Andy Zelenak <andyz@utexas.edu>' to fix it.")
       endif()
     else()
-<<<<<<< HEAD
-      message(FATAL_ERROR "Project 'pid' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/viki/octanis/Octanis1-ROS/catkin_ws/src/pid_lidar/${idir}'.  Ask the maintainer 'Andy Zelenak <andyz@utexas.edu>' to fix it.")
-=======
       message(FATAL_ERROR "Project 'pid' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/rover/Octanis1-ROS/catkin_ws/src/pid_lidar/${idir}'.  Ask the maintainer 'Andy Zelenak <andyz@utexas.edu>' to fix it.")
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
     endif()
     _list_append_unique(pid_INCLUDE_DIRS ${include})
   endforeach()
@@ -141,11 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-<<<<<<< HEAD
-    foreach(path /home/viki/octanis/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/indigo/lib)
-=======
     foreach(path /home/rover/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -168,11 +145,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-<<<<<<< HEAD
-set(pid_EXPORTED_TARGETS "pid_gencfg;pid_generate_messages_cpp;pid_generate_messages_lisp;pid_generate_messages_py")
-=======
 set(pid_EXPORTED_TARGETS "pid_gencfg;pid_generate_messages_cpp;pid_generate_messages_eus;pid_generate_messages_lisp;pid_generate_messages_nodejs;pid_generate_messages_py")
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${pid_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -189,20 +162,12 @@ foreach(depend ${depends})
   if(${count} EQUAL 1)
     # simple dependencies must only be find_package()-ed once
     if(NOT ${pid_dep}_FOUND)
-<<<<<<< HEAD
-      find_package(${pid_dep} REQUIRED)
-=======
       find_package(${pid_dep} REQUIRED NO_MODULE)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
     endif()
   else()
     # dependencies with components must be find_package()-ed again
     list(REMOVE_AT depend_list 0)
-<<<<<<< HEAD
-    find_package(${pid_dep} REQUIRED ${depend_list})
-=======
     find_package(${pid_dep} REQUIRED NO_MODULE ${depend_list})
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
   endif()
   _list_append_unique(pid_INCLUDE_DIRS ${${pid_dep}_INCLUDE_DIRS})
 

@@ -262,11 +262,7 @@ if __name__ == '__main__':
             sys.exit(1)
 
         # environment at generation time
-#<<<<<<< HEAD
         CMAKE_PREFIX_PATH = '/opt/ros/indigo'.split(';')
-#=======
-        CMAKE_PREFIX_PATH = '/opt/ros/kinetic'.split(';')
-#>>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
         # prepend current workspace if not already part of CPP
         base_path = os.path.dirname(__file__)
         if base_path not in CMAKE_PREFIX_PATH:

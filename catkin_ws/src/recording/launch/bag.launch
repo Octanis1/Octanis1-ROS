@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="rosbag" name="rosbag" type="record"
+    args="-a -o /home/viki/launch -j"/>
+#-a for all chanels
+#-o for place and name prefix
+#-j for compression
+
+</launch>

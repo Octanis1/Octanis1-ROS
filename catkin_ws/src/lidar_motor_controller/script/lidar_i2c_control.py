@@ -2,7 +2,8 @@
 
 import os
 import rospy
-import time
+#from time import sleep
+
 from std_msgs.msg import Float64, UInt16
 from pyA20 import i2c
 
@@ -13,7 +14,6 @@ i2c.init("/dev/i2c-2")
 
 def set_lidar_motor(speed, direction):
     i2c.open(0x0f) #The slave device address is 0x55
-
     #set speed and direction
     i2c.write([0x82, speed, speed]) #speed register, speed a, speed b
 
@@ -24,7 +24,6 @@ def set_lidar_motor(speed, direction):
     print(speed)
     i2c.write([0xaa, direction, 0x01]) #direction register, direction, pa$
     i2c.close() #End communication with slave device
-
 
 def ramp_up():
    i=0
