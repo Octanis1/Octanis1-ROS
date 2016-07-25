@@ -1,0 +1,31 @@
+<launch>
+  <node name="left_cam" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_name" value="left_cam" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="brightness" value="60" />
+    <param name="contrast" value="10" />
+    <param name="saturation" value="50" />
+    <param name="io_method" value="mmap" />
+    <param name="framerate" value="2" />
+  </node>
+
+  <node name="right_cam" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
+    <param name="video_device" value="/dev/video1" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_name" value="right_cam" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="brightness" value="60" />
+    <param name="contrast" value="10" />
+    <param name="saturation" value="50" />
+    <param name="io_method" value="mmap" />
+    <param name="framerate" value="2" />
+  </node>
+
+</launch>
+

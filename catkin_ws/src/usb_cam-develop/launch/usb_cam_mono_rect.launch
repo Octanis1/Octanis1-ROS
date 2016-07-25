@@ -1,0 +1,20 @@
+<launch>
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_name" value="left_cam" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="camera_info_url" value="file:///home/rover/Octanis1-ROS/catkin_ws/src/usb_cam-develop/launch/calibration/left_cam.yaml" />
+    <param name="brightness" value="60" />
+    <param name="contrast" value="10" />
+    <param name="saturation" value="50" />
+    <param name="io_method" value="mmap" />
+    <param name="framerate" value="2" />
+  </node>
+
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam" />
+
+</launch>
+
