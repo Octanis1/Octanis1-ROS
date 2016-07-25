@@ -1,0 +1,9 @@
+<launch>
+  <node name="pid_node" pkg="pid" type="controller_lidar" />
+  <node name="rpms2volts_node" pkg="lidar_motor_controller" type="rpms2volts.py">
+
+  
+  </node>
+  <node name="lidar_i2c_node" pkg="lidar_motor_controller" type="lidar_i2c_control.py" />
+
+</launch>

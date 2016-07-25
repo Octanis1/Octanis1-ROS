@@ -1,0 +1,13 @@
+Source: ros-groovy-octovis
+Section: misc
+Priority: extra
+Maintainer: Armin Hornung <hornunga@informatik.uni-freiburg.de>
+Build-Depends: debhelper (>= 7.0.50~), libqglviewer-qt4-dev,cmake,libqt4-opengl-dev,libqt4-dev,ros-groovy-octomap
+Homepage: http://octomap.sf.net
+Standards-Version: 3.9.2
+
+Package: ros-groovy-octovis
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqtgui4,libqt4-opengl,libqglviewer-qt4-2,ros-groovy-octomap
+Description: octovis is visualization tool for the OctoMap library based on Qt and libQGLViewer. See http://octomap.sf.net for details.
+
