@@ -1,5 +1,8 @@
 import os
 import sys
+import rospy
+
+rospy.init_node('shutdown_node')
 
 if not os.getegid() == 0:
     sys.exit('Script must be run as root')
