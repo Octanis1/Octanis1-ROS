@@ -21,9 +21,9 @@ def set_lidar_motor(speed, direction):
     i2c.write([speed])  # speed a
     i2c.write([speed])  # speed b
 
-    i=0
-    while(i<1000):
-      i += 1
+#    i=0
+#    while(i<1000):
+#      i += 1
 
     #print(speed)
     #i2c.write([0xaa, direction, 0x01]) #direction register, direction, pa$
@@ -77,6 +77,11 @@ def i2c_listener():
 
 if __name__ == '__main__':
    # Init
+
+   #set frequency pwm
+   i2c.write([0x84])
+   i2c.write([6])
+   i2c.write([6])
    ramp_up(10,100) #starts motor
    
    # Loop	
