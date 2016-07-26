@@ -28,15 +28,18 @@ def set_lidar_motor(speed, direction):
 
 def ramp_up():
    i=10
-   while(i<100):
+   while(i<150):
        i += 10
        set_lidar_motor(i,0b1010)
+       #set_lidar_motor(i,0b0101)
        time.sleep(0.1)
 
 
 def motor_input_callback(v):
     v_int = v.data
     set_lidar_motor(v_int, 0b1010)
+    #set_lidar_motor(v_int, 0b0101)
+
 
 
 def i2c_listener():

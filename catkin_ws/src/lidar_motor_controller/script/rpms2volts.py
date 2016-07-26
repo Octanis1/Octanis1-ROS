@@ -24,7 +24,7 @@ def convert_to_volts_callback(r):
 
     # Check that we don't exceed the maximum and minimum voltage
     pwm_max = 255
-    pwm_min = 70 # ~140 rpm
+    pwm_min = 50 # rpm
     if pwm > pwm_max:
         pwm = pwm_max
     elif pwm < pwm_min:
