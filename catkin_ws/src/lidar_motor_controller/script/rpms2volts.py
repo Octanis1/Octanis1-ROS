@@ -9,22 +9,15 @@ from std_msgs.msg import Float64
 def convert_to_volts_callback(r):
     new_rpms = float(current_rpms) + r.data
 
-    # We receive the information of the control_effort topic that indicates the value in rpms. Convert it into volts
-    # We have in normal conditions : 3V -> 190 rpms
-    # Volts value should be in pwm duty cycle
-    #pwm_dc0 = round(0.35*255) # 3V*255/11V
-    #pwm0 = 80 # 190 rpms in normal conditions
-    #rpm0 = 190
-    #pwm = round( float(new_rpms)*(pwm_dc0/rpm0) )
-
-
+    # We receive the information of the control_effort topic that indicates the value in rpms. Convert it into "volts" (value of pwm)
     # According to calibration of lidar in normal conditions : VAL_PWM = 0,16*RPMS + 48
 
-    pwm = round( 0.16*new_rpms + 48 )
+    #pwm = round( 0.16*new_rpms + 48 )
+    pwm = round((1/6)*new_rpms)
 
     # Check that we don't exceed the maximum and minimum voltage
     pwm_max = 255
-    pwm_min = 70 # ~140 rpm
+    pwm_min = 40 
     if pwm > pwm_max:
         pwm = pwm_max
     elif pwm < pwm_min:

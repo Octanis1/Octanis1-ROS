@@ -79,9 +79,12 @@ double c=1.;
 double tan_filt = 1.;
 
 // Upper and lower saturation limits
-double upper_limit =  1000.;
-double lower_limit = -1000.; 
+//double upper_limit =  1000.;
+//double lower_limit = -1000.; 
+double upper_limit =  200.;
+double lower_limit = -200.; 
 double windup_limit = 1000.; // Anti-windup term. Limits the absolute value of the integral term.
+double max_error = 200;
 
 std::vector<double> error(3);
 std::vector<double> filtered_error(3);
