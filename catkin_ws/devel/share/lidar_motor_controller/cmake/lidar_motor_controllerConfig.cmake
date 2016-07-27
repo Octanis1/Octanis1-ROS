@@ -34,7 +34,7 @@ macro(_pack_libraries_with_build_configuration VAR)
   set(_index 0)
   while(${_index} LESS ${_count})
     list(GET _argn ${_index} lib)
-    if("${lib}" MATCHES "^(debug|optimized|general)$")
+    if("${lib}" MATCHES "^debug|optimized|general$")
       math(EXPR _index "${_index} + 1")
       if(${_index} EQUAL ${_count})
         message(FATAL_ERROR "_pack_libraries_with_build_configuration() the list of libraries '${ARGN}' ends with '${lib}' which is a build configuration keyword and must be followed by a library")
@@ -67,23 +67,14 @@ set(lidar_motor_controller_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-<<<<<<< HEAD
-  set(lidar_motor_controller_SOURCE_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/src/lidar_motor_controller)
-  set(lidar_motor_controller_DEVEL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/devel)
-=======
-  set(lidar_motor_controller_SOURCE_PREFIX /home/rover/Octanis1-ROS/catkin_ws/src/lidar_motor_controller)
-  set(lidar_motor_controller_DEVEL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/devel)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
+  set(lidar_motor_controller_SOURCE_PREFIX /home/viki/Octanis1-ROS/catkin_ws/src/lidar_motor_controller)
+  set(lidar_motor_controller_DEVEL_PREFIX /home/viki/Octanis1-ROS/catkin_ws/devel)
   set(lidar_motor_controller_INSTALL_PREFIX "")
   set(lidar_motor_controller_PREFIX ${lidar_motor_controller_DEVEL_PREFIX})
 else()
   set(lidar_motor_controller_SOURCE_PREFIX "")
   set(lidar_motor_controller_DEVEL_PREFIX "")
-<<<<<<< HEAD
-  set(lidar_motor_controller_INSTALL_PREFIX /home/viki/octanis/Octanis1-ROS/catkin_ws/install)
-=======
-  set(lidar_motor_controller_INSTALL_PREFIX /home/rover/Octanis1-ROS/catkin_ws/install)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
+  set(lidar_motor_controller_INSTALL_PREFIX /home/viki/Octanis1-ROS/catkin_ws/install)
   set(lidar_motor_controller_PREFIX ${lidar_motor_controller_INSTALL_PREFIX})
 endif()
 
@@ -100,23 +91,19 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(lidar_motor_controller_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "" STREQUAL "")
   set(lidar_motor_controller_INCLUDE_DIRS "")
   set(_include_dirs "")
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
-    elseif("${idir} " STREQUAL "include ")
+    elseif("${idir}" STREQUAL "include")
       get_filename_component(include "${lidar_motor_controller_DIR}/../../../include" ABSOLUTE)
       if(NOT IS_DIRECTORY ${include})
         message(FATAL_ERROR "Project 'lidar_motor_controller' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  Ask the maintainer 'ekixs <ekixs@todo.todo>' to fix it.")
       endif()
     else()
-<<<<<<< HEAD
-      message(FATAL_ERROR "Project 'lidar_motor_controller' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/viki/octanis/Octanis1-ROS/catkin_ws/src/lidar_motor_controller/${idir}'.  Ask the maintainer 'ekixs <ekixs@todo.todo>' to fix it.")
-=======
-      message(FATAL_ERROR "Project 'lidar_motor_controller' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/rover/Octanis1-ROS/catkin_ws/src/lidar_motor_controller/${idir}'.  Ask the maintainer 'ekixs <ekixs@todo.todo>' to fix it.")
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
+      message(FATAL_ERROR "Project 'lidar_motor_controller' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/viki/Octanis1-ROS/catkin_ws/src/lidar_motor_controller/${idir}'.  Ask the maintainer 'ekixs <ekixs@todo.todo>' to fix it.")
     endif()
     _list_append_unique(lidar_motor_controller_INCLUDE_DIRS ${include})
   endforeach()
@@ -125,7 +112,7 @@ endif()
 set(libraries "")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
-  if("${library}" MATCHES "^(debug|optimized|general)$")
+  if("${library}" MATCHES "^debug|optimized|general$")
     list(APPEND lidar_motor_controller_LIBRARIES ${library})
   elseif(TARGET ${library})
     list(APPEND lidar_motor_controller_LIBRARIES ${library})
@@ -135,11 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-<<<<<<< HEAD
-    foreach(path /home/viki/octanis/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/indigo/lib)
-=======
-    foreach(path /home/rover/Octanis1-ROS/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
+    foreach(path /home/viki/Octanis1-ROS/catkin_ws/devel/lib;/home/viki/catkin_ws/devel/lib;/opt/ros/indigo/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -179,20 +162,12 @@ foreach(depend ${depends})
   if(${count} EQUAL 1)
     # simple dependencies must only be find_package()-ed once
     if(NOT ${lidar_motor_controller_dep}_FOUND)
-<<<<<<< HEAD
       find_package(${lidar_motor_controller_dep} REQUIRED)
-=======
-      find_package(${lidar_motor_controller_dep} REQUIRED NO_MODULE)
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
     endif()
   else()
     # dependencies with components must be find_package()-ed again
     list(REMOVE_AT depend_list 0)
-<<<<<<< HEAD
     find_package(${lidar_motor_controller_dep} REQUIRED ${depend_list})
-=======
-    find_package(${lidar_motor_controller_dep} REQUIRED NO_MODULE ${depend_list})
->>>>>>> c48440ae05be0ae1df2b519a7a01c17dc28b8aaf
   endif()
   _list_append_unique(lidar_motor_controller_INCLUDE_DIRS ${${lidar_motor_controller_dep}_INCLUDE_DIRS})
 
