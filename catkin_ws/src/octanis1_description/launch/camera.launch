@@ -1,0 +1,47 @@
+<launch>
+    <arg name="device_left" default="/dev/video0" />
+    <arg name="device_right" default="/dev/video1" />
+    <arg name="width" default="800" />
+    <arg name="height" default="600" />
+    <arg name="format" default="yuyv" />
+    <arg name="framerate" value="20" />
+    <arg name="contrast" value="32" />
+    <arg name="brightness" value="0" />
+    <arg name="saturation" value="60" />
+    <arg name="sharpness" value="2" />
+
+    <group ns="raw_stereo">
+        <node name="left" pkg="usb_cam" type="usb_cam_node" output="screen">
+            <param name="video_device" value="$(arg device_left)" />
+            <param name="image_width" value="$(arg width)" />
+            <param name="image_height" value="$(arg height)" />
+            <param name="pixel_format" value="$(arg format)" />
+	    <param name="framerate" value="$(arg framerate)" />
+	    <param name="contrast" value="$(arg contrast)" />
+	    <param name="brightness" value="$(arg brightness)" />
+	    <param name="saturation" value="$(arg saturation)" />
+	    <param name="sharpness" value="$(arg sharpness)" />
+	    <param name="camera_frame_id" value="left_camera" />
+            <param name="io_method" value="mmap" />
+
+	    <!-- TODO ADD PATH TO THE CALIBRATION FILE for left cam -->
+
+        </node>
+        <node name="right" pkg="usb_cam" type="usb_cam_node" output="screen">
+            <param name="video_device" value="$(arg device_right)" />
+            <param name="image_width" value="$(arg width)" />
+            <param name="image_height" value="$(arg height)" />
+            <param name="pixel_format" value="$(arg format)" />
+	    <param name="framerate" value="$(arg framerate)" />
+            <param name="contrast" value="$(arg contrast)" />
+            <param name="brightness" value="$(arg brightness)" />
+            <param name="saturation" value="$(arg saturation)" />
+            <param name="sharpness" value="$(arg sharpness)" />
+            <param name="camera_frame_id" value="right_camera" />
+            <param name="io_method" value="mmap" />
+
+	    <!-- TODO ADD PATH TO THE CALIBRATION FILE for right cam-->
+   
+        </node>
+    </group>
+</launch>

@@ -54,7 +54,7 @@
 // Primary PID controller input & output variables
 double plant_state;                 // current output of plant
 double control_effort;              // output of pid controller
-double setpoint = 190;                // desired output of plant
+double setpoint = 250;                // desired output of plant
 bool pid_enabled = true;            // PID is enabled to run
 
 ros::Time prev_time;
@@ -79,9 +79,12 @@ double c=1.;
 double tan_filt = 1.;
 
 // Upper and lower saturation limits
-double upper_limit =  1000.;
-double lower_limit = -1000.; 
+//double upper_limit =  1000.;
+//double lower_limit = -1000.; 
+double upper_limit =  200.;
+double lower_limit = -200.; 
 double windup_limit = 1000.; // Anti-windup term. Limits the absolute value of the integral term.
+double max_error = 200;
 
 std::vector<double> error(3);
 std::vector<double> filtered_error(3);
@@ -94,7 +97,7 @@ ros::Publisher control_effort_pub;
 
 std::string topic_from_controller;
 std::string topic_from_plant;
-std::string setpoint_topic;
+//std::string setpoint_topic;
 std::string node_name = "pid_node";
 
 std_msgs::Float64 control_msg;

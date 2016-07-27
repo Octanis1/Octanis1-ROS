@@ -42,14 +42,10 @@
 //#include <dynamic_reconfigure/server.h>
 #include <ros/time.h>
 
-void setpoint_callback(const std_msgs::UInt16& setpoint_msg)
-{
-  setpoint = setpoint_msg.data;
-}
-
 void plant_state_callback(const std_msgs::UInt16& state_msg)
 {
-
+  if (state_msg.data < 600) // To avoid blown up values
+  {
   if ( !((Kp<=0. && Ki<=0. && Kd<=0.) || (Kp>=0. && Ki>=0. && Kd>=0.)) ) // All 3 gains should have the same sign
   {
     ROS_WARN("All three gains (Kp, Ki, Kd) should have the same sign for stability.");
@@ -60,6 +56,16 @@ void plant_state_callback(const std_msgs::UInt16& state_msg)
   error.at(2) = error.at(1);
   error.at(1) = error.at(0);
   error.at(0) = setpoint - plant_state; // Current error goes to slot 0
+
+  //..... reset error if it saturates .....
+  if ((error.at(0)>=max_error) && (error.at(1)>=max_error) && (error.at(2)>=max_error))
+  {
+    error.at(0) = 0.0;
+    error.at(1) = 0.0;
+    error.at(2) = 0.0; 
+    ROS_INFO("Error reset");
+  }
+  // ......
 
   // calculate delta_t
   if (!prev_time.isZero()) // Not first time through the program  
@@ -103,9 +109,9 @@ void plant_state_callback(const std_msgs::UInt16& state_msg)
 
     c = 1/tan_filt;
   }
- 
+
   filtered_error.at(2) = filtered_error.at(1);
-  filtered_error.at(1) = filtered_error.at(0); 
+  filtered_error.at(1) = filtered_error.at(0);
   filtered_error.at(0) = (1/(1+c*c+1.414*c))*(error.at(2)+2*error.at(1)+error.at(0)-(c*c-1.414*c+1)*filtered_error.at(2)-(-2*c*c+2)*filtered_error.at(1));
 
   // Take derivative of error
@@ -159,7 +165,7 @@ void plant_state_callback(const std_msgs::UInt16& state_msg)
     diag_status.level = diagnostic_msgs::DiagnosticStatus::ERROR;
     diag_status.message = "PID controller disabled";
   }
-
+  }
   // update diags
   ++measurements_received;
   diags->freq_status.tick();
@@ -173,21 +179,6 @@ void pid_enable_callback(const std_msgs::Bool& pid_enable_msg)
   pid_enabled = pid_enable_msg.data;
 }
 
-//bool first_reconfig = true;
-
-/*void reconfigure_callback(pid::PidConfig &config, uint32_t level)
-{
-  if (first_reconfig)
-  {
-    first_reconfig = false;
-    return;     // Ignore the first call to reconfigure which happens at startup
-  }
-
-  Kp = config.Kp * config.Kp_scale;
-  Ki = config.Ki * config.Ki_scale;
-  Kd = config.Kd * config.Kd_scale;
-  ROS_INFO("Pid reconfigure request: Kp: %f, Ki: %f, Kd: %f", Kp, Ki, Kd);
-}*/
 
 void get_pid_diag_status(diagnostic_updater::DiagnosticStatusWrapper& pid_diag_status)
 {
@@ -231,7 +222,6 @@ void print_parameters()
   std::cout << "pid node name: " << ros::this_node::getName() << std::endl;
   std::cout << "Name of topic from controller: " << topic_from_controller << std::endl;
   std::cout << "Name of topic from the plant: " << topic_from_plant << std::endl;
-  std::cout << "Name of setpoint topic: " << setpoint_topic << std::endl;
   std::cout << "Integral-windup limit: " << windup_limit << std::endl;
   std::cout << "Saturation limits: " << upper_limit << "/" << lower_limit << std::endl;
   std::cout << "-----------------------------------------" << std::endl;
@@ -265,10 +255,10 @@ int main(int argc, char **argv)
   node_priv.param<double>("upper_limit", upper_limit, 1000.0);
   node_priv.param<double>("lower_limit", lower_limit, -1000.0);
   node_priv.param<double>("windup_limit", windup_limit, 1000.0);
+  node_priv.param<double>("max_error", max_error, 500.0);
   node_priv.param<double>("cutoff_frequency", cutoff_frequency, -1.0);
   node_priv.param<std::string>("topic_from_controller", topic_from_controller, "control_effort");
   node_priv.param<std::string>("topic_from_plant", topic_from_plant, "rpms");
-  node_priv.param<std::string>("setpoint_topic", setpoint_topic, "setpoint");
   node_priv.param<double>("max_loop_frequency", max_loop_frequency, 1.0);
   node_priv.param<double>("min_loop_frequency", min_loop_frequency, 1000.0);
 
@@ -283,17 +273,8 @@ int main(int argc, char **argv)
   control_effort_pub = node.advertise<std_msgs::Float64>(topic_from_controller, 1);
 
   ros::Subscriber sub = node.subscribe(topic_from_plant, 1, plant_state_callback );
-  // Comment for now not to have changes. We want constant rpms
-  ros::Subscriber setpoint_sub = node.subscribe(setpoint_topic, 1, setpoint_callback );
   ros::Subscriber pid_enabled_sub = node.subscribe("pid_enable", 1, pid_enable_callback );
 
-
-/*  // configure dynamic reconfiguration
-  dynamic_reconfigure::Server<pid::PidConfig> config_server;
-  dynamic_reconfigure::Server<pid::PidConfig>::CallbackType f;
-  f = boost::bind(&reconfigure_callback, _1, _2);
-  config_server.setCallback(f);
-*/
 
   // initialize diagnostics
   diags = new PidControllerDiags;
