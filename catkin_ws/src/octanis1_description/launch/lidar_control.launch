@@ -1,9 +1,23 @@
 <launch>
-  <node name="pid_node" pkg="pid" type="controller_lidar" />
-  <node name="rpms2volts_node" pkg="lidar_motor_controller" type="rpms2volts.py">
-
-  
+  <node name="pid_node" pkg="pid" type="controller_lidar" >
+      <param name="Kp" value="1.25" />
+      <param name="Ki" value="0.3" />
+      <param name="Kd" value="0.0" />
+      <param name="upper_limit" value="200.0" />
+      <param name="lower_limit" value="-200.0" />
+      <param name="windup_limit" value="1000.0" />
+      <param name="max_error" value="200.0" />
+      <param name="cutoff_frequency" value="-1" />
+      <param name="max_loop_frequency" value="1.0" />
+      <param name="min_loop_frequency" value="1000.0" />
+      <param name="topic_from_plant" value="rpms" />
+      <param name="topic_from_controller" value="control_effort" />
+      <param name="setpoint" value="250" />	 
   </node>
+
+  <node name="rpms2volts_node" pkg="lidar_motor_controller" type="rpms2volts.py">  
+  </node>
+
   <node name="lidar_i2c_node" pkg="lidar_motor_controller" type="lidar_i2c_control.py" />
 
 </launch>
