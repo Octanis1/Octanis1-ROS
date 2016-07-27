@@ -3,28 +3,20 @@
       <param name="Kp" value="1.25" />
       <param name="Ki" value="0.3" />
       <param name="Kd" value="0.0" />
-      <param name="upper_limit" value="1000" />
-      <param name="lower_limit" value="-1000" />
-      <param name="windup_limit" value="1000" />
+      <param name="upper_limit" value="200.0" />
+      <param name="lower_limit" value="-200.0" />
+      <param name="windup_limit" value="1000.0" />
+      <param name="max_error" value="200.0" />
       <param name="cutoff_frequency" value="-1" />
-      <!-- <param name="diagnostic_period" value="0.25" /> -->
       <param name="max_loop_frequency" value="1.0" />
       <param name="min_loop_frequency" value="1000.0" />
       <param name="topic_from_plant" value="rpms" />
-      <param name="setpoint_topic" value="setpoint" />
+      <!-- <param name="setpoint_topic" value="setpoint" /> -->
       <param name="topic_from_controller" value="control_effort" />
       <param name="setpoint" value="250" />	
      </node>	
 
 <!--	
-    <node name="olimex_lidar" pkg="lidar_motor_controller" type="rpms2volts" output="screen" />
-
-    <node name="servo_sim_node" pkg="pid" type="plant_sim_lidar" output="screen" >
-      <param name="plant_order" value="2" />
-    </node>
-
-    <node name="setpoint_node_lidar" pkg="pid" type="setpoint_node_lidar" output="screen" />
-
     <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot"
     args="/control_effort/data /state/data /setpoint/data" />
 
