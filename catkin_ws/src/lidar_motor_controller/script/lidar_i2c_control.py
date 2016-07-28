@@ -8,7 +8,6 @@ from pyA20 import i2c
 
 # REGISTERS AND ADRESSES
 REG_speed  = 0x82  # speed register
-REG_frqpwm = 0x84  # frequency of pwm register
 ADR_slave  = 0x0f  # slave device address
 
 #Initialize module to use /dev/i2c-2
@@ -18,12 +17,10 @@ i2c.init("/dev/i2c-2")
 def get_params():
     global ramp_min 
     global ramp_max
-    global freq_pwm
     
     # Get parameters from launch file
     ramp_min = rospy.get_param('~ramp_min') if rospy.has_param('~ramp_min') else 10
     ramp_max = rospy.get_param('~ramp_max') if rospy.has_param('~ramp_max') else 100
-    freq_pwm = rospy.get_param('~frequency_pwm') if rospy.has_param('~frequency_pwm') else 0
 
 
 def print_params():
@@ -65,15 +62,6 @@ def motor_input_callback(v):
 def i2c_listener():   
    rospy.Subscriber('motor_input', UInt16, motor_input_callback, queue_size=1)
    rospy.spin()
-   
-
-def setFrequencyPWM(freq):
-   i2c.open(ADR_slave)
-   i2c.write([REG_frqpwm])
-   i2c.write([freq])
-   i2c.write([freq])
-   i2c.close()
-
 
 if __name__ == '__main__':
    rospy.init_node('lidar_i2c_node', anonymous=True)
@@ -81,7 +69,6 @@ if __name__ == '__main__':
    
    # Init
    print_params()
-   setFrequencyPWM(freq_pwm)  # Set frequency pwm
    ramp_up(ramp_min,ramp_max)  # Starts motor
    
    # Loop	
