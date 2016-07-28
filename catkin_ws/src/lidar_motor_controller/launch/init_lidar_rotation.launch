@@ -2,7 +2,7 @@
    <node name="lidar_i2c_node" pkg="lidar_motor_controller" type="lidar_i2c_control.py" output="screen">
       <param name="ramp_min" value="20" />
       <param name="ramp_max" value="90" />
-      <param name="frequency_pwm" value="6" />
+      <param name="frequency_pwm" value="0" />
     </node>	
 	
     <node name="rpms2volts_node" pkg="lidar_motor_controller" type="rpms2volts.py" output="screen">
