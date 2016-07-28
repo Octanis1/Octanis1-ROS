@@ -27,7 +27,6 @@ def print_params():
    print(" ----- PARAMETERS -----")
    print(" - Ramp min : " + str(ramp_min))
    print(" - Ramp max : " + str(ramp_max))
-   print(" - Frequency PWM : " + str(freq_pwm))
    print(" ----------------------")
 
 
