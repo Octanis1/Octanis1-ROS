@@ -32,7 +32,7 @@ def get_params():
     if rospy.has_param('~frequency_pwm'):
         freq_pwm = rospy.get_param('~frequency_pwm')
     else:
-        freq_pwm = 5
+        freq_pwm = 0
 
 
 def print_params():
