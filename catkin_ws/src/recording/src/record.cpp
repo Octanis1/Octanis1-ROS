@@ -25,7 +25,7 @@ void mavlinkpublish()
 {
                 mavlink_message_t msg;
 
-        mavlink_msg_command_ack_pack(13, 22, &msg, 400, 0);
+        mavlink_msg_command_ack_pack(13, 250, &msg, 400, 0);
 
                 auto rmsg = boost::make_shared<mavros_msgs::Mavlink>();
 
@@ -82,7 +82,6 @@ if(arm=0){
 It needs to confirm this message by sending a COMMAND_ACK ( #77 ) message back to the mainboard (via mav_UART) to confirm or deny the command
 */
 int main(int argc, char **argv){
-
 	arm=0;
 	ros::init(argc, argv, "rover");
 	ros::NodeHandle n;
@@ -90,6 +89,5 @@ int main(int argc, char **argv){
 
 	ros::Subscriber sub = n.subscribe("mavlink/from", 2000, mavlinkCallback);
 	ros::spin();
-
 }
 
