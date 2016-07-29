@@ -9,7 +9,7 @@
   <include file="$(find octanis1_description)/launch/mavlink.launch"/>
 
   <!-- Run camera launch file to launch the camera -->
-  <include file="$(find octanis1_description)/launch/camera.launch"/>
+<!--  <include file="$(find octanis1_description)/launch/camera.launch"/> -->
 
   <!-- Run Bosch BNO055 IMU Driver -->
   <arg name="bosch_config_file" default="$(find octanis1_description)/params/imu_bosch.yaml"/> 
@@ -22,4 +22,11 @@
   <node pkg="xv_11_laser_driver" type="neato_laser_publisher" name="neato_laser_publisher" output="screen">
     <rosparam file="$(arg xv_11_laser_driver_config)" command="load"/>
   </node>
+
+  <!-- Run PI Lidar controller -->
+  <include file="$(find octanis1_description)/launch/lidar_control.launch"/>
+
+  <!-- Run the octomap creation -->
+  <include file="$(find octanis1_description)/launch/octomap.launch"/>
+  
 </launch>
