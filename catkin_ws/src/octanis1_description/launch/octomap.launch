@@ -1,0 +1,18 @@
+<launch>
+
+  <node pkg="lidar" name="point2cloud" type="point2cloud">
+  </node>
+
+  <!-- Run the assembler of the point clouds -->
+  <include file="$(find lidar)/launch/pointCloudAssembler.launch"/>
+
+  <node pkg="lidar" name="periodic_snapshotter" type="periodic_snapshotter">
+  </node>
+
+  <node pkg="point_cloud_converter" name="converter" type="converter">
+  </node>
+
+  <!-- Run the assembler of the point clouds -->
+  <include file="$(find octomap_server)/launch/octomap_mapping.launch"/>
+
+</launch>
