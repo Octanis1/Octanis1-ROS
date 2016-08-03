@@ -4,13 +4,14 @@
 	<!-- NAME OF THE ROBOT -->
 	<xacro:property name="name_robot" value="octanis1" />
 	<!-- POSITION CONSTANTS (only whose which can change) -->
-	<xacro:property name="length_LIDAR" value="0.06" />
-	<xacro:property name="radius_LIDAR" value="0.076" />
-	<xacro:property name="radius_wheel" value="0.08" />
+	<xacro:property name="length_LIDAR" value="0.04" />
+	<xacro:property name="radius_LIDAR" value="0.035" />
+	<xacro:property name="radius_wheel" value="0.075" />
 	<xacro:property name="length_wheel" value="0.045" />
 	<!-- INERTIAL CONSTANTS (because they can change) -->
 	<xacro:property name="weight_box" value="2.5" />
 	<xacro:property name="weight_LIDAR" value="0.2" />
+   <xacro:property name="weight_dGPS" value="0.1" />
 	<xacro:property name="weight_axe" value="0.3" />
 	<xacro:property name="weight_wheel" value="0.2" />
 	<xacro:property name="std_ixx" value="100" />
@@ -195,6 +196,18 @@
 			<material name="black" />
 		</visual>
 	</link>
+
+   <link name="dGPS">
+		<xacro:default_inertia mass="${weight_dGPS}"/>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/> <!-- angle de 55 = 0.96 rad-->
+			<geometry>
+				<cylinder length="0.1" radius="0.1"/>
+			</geometry>
+			<material name="black" />
+		</visual>
+	</link>
+
 	<link name="IMU" />
 
 	<joint name="joint_axe_front_left" type="continuous">
@@ -228,8 +241,14 @@
 	<joint name="joint_LIDAR" type="continuous">
 		<parent link="base_link" />
 		<child link="LIDAR" />
-		<origin xyz="0 0.12 0.04" rpy="-0.96 0 0" />
+		<origin xyz="0 0.215 0.01" rpy="-0.96 0 0" />
 		<axis xyz="0 0 1" />
+	</joint>
+
+  <joint name="joint_dGPS" type="fixed">
+		<parent link="base_link" />
+		<child link="dGPS" />
+		<origin xyz="0 0.10 0.08" rpy="0 0 0" />
 	</joint>
 
 	<joint name="joint_IMU" type="fixed">
