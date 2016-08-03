@@ -1,0 +1,12 @@
+<launch>
+   <node name="lidar_i2c_node" pkg="lidar_motor_controller" type="lidar_i2c_control.py" output="screen">
+      <param name="ramp_min" value="20" />
+      <param name="ramp_max" value="90" />
+    </node>	
+	
+    <node name="rpms2volts_node" pkg="lidar_motor_controller" type="rpms2volts.py" output="screen">
+      <param name="slope" value="0.16" />
+      <param name="offset" value="48" />
+    </node>
+
+</launch>

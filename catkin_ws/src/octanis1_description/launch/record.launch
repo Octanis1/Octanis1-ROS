@@ -1,0 +1,3 @@
+<launch>
+<node pkg="recording" name="record" type="record" output="screen"/>
+</launch>

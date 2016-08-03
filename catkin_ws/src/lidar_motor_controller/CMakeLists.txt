@@ -152,11 +152,9 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 install(PROGRAMS
   script/lidar_i2c_control.py
-#  script/rpms2volts.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 install(PROGRAMS
-#  script/lidar_i2c_control.py
   script/rpms2volts.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
@@ -176,11 +174,11 @@ install(PROGRAMS
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+install(DIRECTORY launch/
+  init_lidar_rotation.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
+
 
 #############
 ## Testing ##

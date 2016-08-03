@@ -65,32 +65,18 @@ include_directories(include
 
 ## Declare a cpp executable
 
-##add_executable(controller src/controller.cpp)
 add_executable(controller_lidar src/controller_lidar.cpp) ## Added
-##add_executable(plant_sim src/plant_sim.cpp)
-##add_executable(plant_sim_lidar src/plant_sim_lidar.cpp)
-##add_executable(setpoint_node src/setpoint_node.cpp)
-add_executable(setpoint_node_lidar src/setpoint_node_lidar.cpp) ## Added
-##add_executable(sim_time src/sim_time.cpp)
 
 ##add_dependencies(controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater ${PROJECT_NAME}_gencfg)
 add_dependencies(controller_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater ${PROJECT_NAME}_gencfg)
 ##add_dependencies(plant_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
 ##add_dependencies(plant_sim_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
 ##add_dependencies(setpoint_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
-add_dependencies(setpoint_node_lidar ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
-##add_dependencies(sim_time ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} dynamic_reconfigure diagnostic_updater)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 
-##target_link_libraries(controller ${catkin_LIBRARIES})
 target_link_libraries(controller_lidar ${catkin_LIBRARIES})
-##target_link_libraries(plant_sim ${catkin_LIBRARIES})
-##target_link_libraries(plant_sim_lidar ${catkin_LIBRARIES})
-##target_link_libraries(setpoint_node ${catkin_LIBRARIES})
-target_link_libraries(setpoint_node_lidar ${catkin_LIBRARIES})
-##target_link_libraries(sim_time ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -123,7 +109,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(DIRECTORY launch/
-  #pid.launch
+  launch_pid_lidar.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 

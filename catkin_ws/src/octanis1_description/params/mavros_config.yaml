@@ -5,6 +5,9 @@ startup_px4_usb_quirk: false
 
 # --- system plugins ---
 
+system_id: 13
+component_id: 0
+
 # sys_status & sys_time connection options
 conn:
   heartbeat_rate: 1.0    # send hertbeat rate in Hertz
