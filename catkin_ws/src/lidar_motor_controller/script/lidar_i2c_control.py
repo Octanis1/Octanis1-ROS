@@ -15,9 +15,11 @@ i2c.init("/dev/i2c-2")
 #global command_counter = 0
 
 def set_lidar_motor(speed, direction):
+
     i2c.open(0x0f)  # The slave device address is 0x0f
+
     #set speed
-    i2c.write([0x82]  # speed register, 
+    i2c.write([0x82])  # speed register
     i2c.write([speed])  # speed a
     i2c.write([speed])  # speed b
 
@@ -25,25 +27,18 @@ def set_lidar_motor(speed, direction):
 #    while(i<1000):
 #      i += 1
 
-    #print(speed)
+    print(speed)
     #i2c.write([0xaa, direction, 0x01]) #direction register, direction, pa$
     i2c.close() #End communication with slave device
 
 
-<<<<<<< HEAD
-def ramp_up():
-   i=10
-   while(i<150):
-=======
 def ramp_up(ramp_min, ramp_max):
 
    print("# INIT : Ramping up motor")
    i=ramp_min
    while(i<ramp_max):
->>>>>>> 2d6a34961bea7bc4ed411b79d6b53454d8cc43f1
        i += 10
        set_lidar_motor(i,0b1010)
-       #set_lidar_motor(i,0b0101)
        time.sleep(0.1)
 
    print("Ramped up to speed %d", ramp_max)
@@ -52,7 +47,6 @@ def ramp_up(ramp_min, ramp_max):
 def motor_input_callback(v):
     v_int = v.data
     set_lidar_motor(v_int, 0b1010)
-    #set_lidar_motor(v_int, 0b0101)
 
 
     #global command_counter += 1
@@ -60,7 +54,7 @@ def motor_input_callback(v):
 	#set_lidar_motor(v_int, 0b1010)
     #else:
 	#global command_counter = 0
-	#ramp_up(50, 150)	
+	#ramp_up(50, 150)
 
 
 #def reset_lidar_callback(r):
@@ -68,15 +62,15 @@ def motor_input_callback(v):
 #    pub = rospy.Publisher('pid_enable', Bool, queue_size=10)
 #    rospy.loginfo(False)
 #    pub.publish(False)
-    
+
 #    # Reset
 #    ramp_up(50,120)
-    
+
 #    # Activate PID
 #    pub = rospy.Publisher('pid_enable', Bool, queue_size=10)
 #    rospy.loginfo(True)
 #    pub.publish(True)
- 
+
 
 def i2c_listener():
    rospy.init_node('i2c_listener', anonymous=True)
@@ -88,11 +82,13 @@ if __name__ == '__main__':
    # Init
 
    #set frequency pwm
+#   i2c.open(0x0f)
    i2c.write([0x84])
    i2c.write([6])
    i2c.write([6])
    ramp_up(10,100) #starts motor
-   
-   # Loop	
+#   i2c.close()
+
+   # Loop
    i2c_listener()
    rospy.spin()

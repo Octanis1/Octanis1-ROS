@@ -3,10 +3,10 @@
       <param name="Kp" value="1.0" />
       <param name="Ki" value="0.001" />
       <param name="Kd" value="0.0" />
-      <param name="upper_limit" value="200.0" />
-      <param name="lower_limit" value="-200.0" />
+      <param name="upper_limit" value="700.0" />
+      <param name="lower_limit" value="-700.0" />
       <param name="windup_limit" value="1000.0" />
-      <param name="max_error" value="200.0" />
+      <param name="max_error" value="300.0" />
       <param name="cutoff_frequency" value="-1" />
       <param name="max_loop_frequency" value="1.0" />
       <param name="min_loop_frequency" value="1000.0" />

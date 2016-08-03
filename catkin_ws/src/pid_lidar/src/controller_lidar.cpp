@@ -62,7 +62,7 @@ void plant_state_callback(const std_msgs::UInt16& state_msg)
   {
     error.at(0) = 0.0;
     error.at(1) = 0.0;
-    error.at(2) = 0.0; 
+    error.at(2) = 0.0;
     ROS_INFO("Error reset");
   }
   // ......

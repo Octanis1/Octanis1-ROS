@@ -12,16 +12,12 @@ def convert_to_volts_callback(r):
     # We receive the information of the control_effort topic that indicates the value in rpms. Convert it into "volts" (value of pwm)
     # According to calibration of lidar in normal conditions : VAL_PWM = 0,16*RPMS + 48
 
-    #pwm = round( 0.16*new_rpms + 48 )
-    pwm = round((1/6)*new_rpms)
+    pwm = round( 0.16*new_rpms + 48 )
+    #pwm = round((1/6)*new_rpms)
 
     # Check that we don't exceed the maximum and minimum voltage
     pwm_max = 255
-<<<<<<< HEAD
-    pwm_min = 50 # rpm
-=======
-    pwm_min = 40 
->>>>>>> 2d6a34961bea7bc4ed411b79d6b53454d8cc43f1
+    pwm_min = 40
     if pwm > pwm_max:
         pwm = pwm_max
     elif pwm < pwm_min:
