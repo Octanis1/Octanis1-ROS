@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="rtimulib_ros" type="rtimulib_ros" name="rtimulib_node" output="screen">
+        <param name="calibration_file_path" value="$(find octanis1_description)/params"/>
+        <param name="calibration_file_name" value="RTIMULib" />
+        <param name="frame_id" value="IMU2"/>
+        <param name="topic_name" value="imu2"/>
+        <param name="update_rate" value="10"/>
+    </node>
+</launch>
