@@ -1,0 +1,12 @@
+[submodule "catkin_ws_mission/src/bosch_imu_driver"]
+	path = catkin_ws_mission/src/bosch_imu_driver
+	url = git@github.com-bosch:Octanis1/bosch_imu_driver.git
+[submodule "catkin_ws_mission/src/rtimulib_ros"]
+	path = catkin_ws_mission/src/rtimulib_ros
+	url = git@github.com-rtimu:Octanis1/rtimulib_ros.git
+[submodule "catkin_ws_mission/src/robot_localization"]
+	path = catkin_ws_mission/src/robot_localization
+	url = https://github.com/cra-ros-pkg/robot_localization
+[submodule "catkin_ws_mission/src/xv_11_laser_driver"]
+	path = catkin_ws_mission/src/xv_11_laser_driver
+	url = https://github.com/rohbotics/xv_11_laser_driver
