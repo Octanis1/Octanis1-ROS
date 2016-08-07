@@ -1,31 +1,28 @@
 <launch>
 
-  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-    <rosparam command="load" file="$(find octanis1_description)/params/robot_localization_ekf.yaml" />
-    <remap from="/odometry/filtered" to="/odometry/filtered/local" />
-  </node>
+    <rosparam command="load" file="$(find octanis1_description)/params/robot_localization.yaml" />
 
-  <!--  It produces an odometry message in coordinates that are consistent with your robot's world frame.   -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true" />
 
-  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" respawn="true">
-      <param name="magnetic_declination_radians" value="0.017453292" />
-      <param name="publish_filtered_gps" value="false" />
-      <param name="yaw_offset" value="1.570796327"/>
-      <param name="frequency" value="5" />
-      <param name="zero_altitude" value="false"/>
-      <param name="wait_for_datum" value="false"/>
-      <param name="delay" value="3"/>
-      <param name="broadcast_utm_transform" value="false"/>
-      <param name="use_odometry_yaw" value="false" />
-      <remap from="/odometry/filtered" to="/odometry/filtered/global" />
-      <remap from="/gps/fix" to="/mavros/global_position/raw/fix" /> 
-      <remap from="/imu/data" to="/imu/data" />
-  </node>
 
-  <!-- Run another instance of a robot_localization state estimation node that fuses all sources of data, including the GPS. Set the world_frame parameter for this instance to the same value as the map_frame parameter.-->
-  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_gps" clear_params="true">
-    <remap from="/odometry/filtered" to="/odometry/filtered/global" />
-    <rosparam command="load" file="$(find octanis1_description)/params/robot_localization_ekf_gps.yaml" />
-  </node>
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+      <remap from="odometry/filtered" to="odometry/filtered/global"/>
+    </node>
+
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true">
+      <remap from="odometry/filtered" to="odometry/filtered/global"/>
+      <remap from="gps/fix" to="mavros/global_position/raw/fix" />
+      <remap from="imu/data" to="imu2/data" />
+    </node>
+
+<!--
+    <node pkg="gps_common" type="utm_odometry_node" name="utm_odometry_node" clear_params="true">
+      <remap from="fix" to="mavros/global_position/raw/fix"/>
+      <remap from="odom" to="odometry/gps"/>
+      <param name="frame_id" value="odom" />
+      <param name="child_frame_id" value="" />
+
+    </node>
+-->
 
 </launch>
