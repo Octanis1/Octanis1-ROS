@@ -1,0 +1,7 @@
+<launch>
+  <!-- Run XV11 LIDAR Driver -->
+  <arg name="xv_11_laser_driver_config" default="$(find octanis1_description)/params/xv11_lidar.yaml"/> 
+  <node pkg="xv_11_laser_driver" type="neato_laser_publisher" name="neato_laser_publisher" output="screen">
+    <rosparam file="$(arg xv_11_laser_driver_config)" command="load"/>
+  </node>
+</launch>
