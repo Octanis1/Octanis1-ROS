@@ -26,7 +26,4 @@
   <!-- Run PI Lidar controller -->
   <include file="$(find octanis1_description)/launch/lidar_control.launch"/>
 
-  <!-- Run the octomap creation -->
-  <include file="$(find octanis1_description)/launch/octomap.launch"/>
-  
 </launch>
