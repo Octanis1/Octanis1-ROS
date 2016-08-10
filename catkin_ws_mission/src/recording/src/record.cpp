@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 #define MAVLINK_DIALECT common
 #include <ros/ros.h>
 #include <sensor_msgs/Imu.h>
@@ -19,75 +18,70 @@
 #include <time.h>
 
 float arm;
+float launch;
 ros::Publisher record_pub;
 
 void mavlinkpublish()
 {
-                mavlink_message_t msg;
+        mavlink_message_t msg;
 
         mavlink_msg_command_ack_pack(13, 250, &msg, 400, 0);
 
-                auto rmsg = boost::make_shared<mavros_msgs::Mavlink>();
+        auto rmsg = boost::make_shared<mavros_msgs::Mavlink>();
 
         rmsg->header.stamp = ros::Time::now();
         mavros_msgs::mavlink::convert(msg, *rmsg);
-                record_pub.publish(rmsg);
+
+        record_pub.publish(rmsg);
+
+        std::cout<<"published mavmsg id "<<rmsg->msgid<<std::endl;
 }
 
 void mavlinkCallback(const mavros_msgs::Mavlink::ConstPtr &msg)
 {
-if(msg->msgid==76){	
-	mavlink_message_t msgarm;
-	mavlink_status_t stsarm;
-	uint8_t i;
-	i=0;
-	while(i<msg->len){
-	  uint8_t cp;
-	  cp=msg->payload64[i];
-	  mavlink_parse_char(MAVLINK_COMM_1, cp, &msgarm, &stsarm);
-	  i++;
-	  }
- 	mavlink_command_long_t cmd;
- 	mavlink_msg_command_long_decode(&msgarm, &cmd);
-	if(cmd.command==400){
+if(msg->msgid==76)
+{	
+        mavlink_message_t msgarm;
+        mavros_msgs::mavlink::convert(*msg, msgarm);
+        mavlink_command_long_t cmd;
+        mavlink_msg_command_long_decode(&msgarm, &cmd);
+
+	if(cmd.command==400)
+	{
 	  arm=cmd.param1;
 	  mavlinkpublish();
-	  if(arm=1){
+	  if(arm==1)
+	  {
+	    if (launch==0)
+	    {
 	    system("roslaunch recording bag.launch");
+	    launch=1;
+	    }
+	  }
+	  else if (arm==0)
+	  {
+	    if (launch==1)
+	    {
+	    system("rosnode kill rosbag");
+	    launch=0;
 	    }
 	  }
 	}
-if(arm=0){
-	mavlink_message_t message;
-	mavlink_status_t status;
-	uint8_t i;
-	i=0;
-	if (msg->msgid==46){
-	  while(i<msg->len){
-	    uint8_t cp;
-            cp=msg->payload64[i];
-	    mavlink_parse_char(MAVLINK_COMM_1, cp, &message, &status);
-	    i++;
-	    }
-	  mavlink_mission_item_reached_t mir;
-	  mavlink_msg_mission_item_reached_decode(&message, &mir);
-	  printf("hi: %u \n", mir.seq);
-	  if(mir.seq==0){
-  	    system("rosnode kill rosbag");
- 	    }
-	  }
-	}
+
+}
 }
 /*
 It needs to confirm this message by sending a COMMAND_ACK ( #77 ) message back to the mainboard (via mav_UART) to confirm or deny the command
 */
 int main(int argc, char **argv){
+	launch=0;
 	arm=0;
 	ros::init(argc, argv, "rover");
-	ros::NodeHandle n;
-	ros::Publisher record_pub = n.advertise<mavros_msgs::Mavlink>("mavlink/to", 2000);
+	ros::NodeHandle n("mavlink");
+	record_pub = n.advertise<mavros_msgs::Mavlink>("to", 2000);
 
-	ros::Subscriber sub = n.subscribe("mavlink/from", 2000, mavlinkCallback);
+	if(!record_pub){ROS_WARN("publisher invalid");}
+	ros::Subscriber sub = n.subscribe("from", 2000, mavlinkCallback);
 	ros::spin();
 }
 
