@@ -1,8 +1,12 @@
 <launch>
 
   <node pkg="rosbag" name="rosbag" type="record"
-    args="-a -o /home/viki/launch -j "  output="screen"/>
-#-a for all chanels
+    args=" -o /home/viki/launch -j 
+/rpms
+/motor_input
+"
+/>
+#add topics on a new line before the end quote
 #-o for place and name prefix
 #-j for compression
 
