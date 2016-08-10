@@ -13,3 +13,6 @@
 [submodule "catkin_ws_mission/src/gps_umd"]
 	path = catkin_ws_mission/src/gps_umd
 	url = https://github.com/ktossell/gps_umd
+[submodule "catkin_ws_mission/src/mavros"]
+	path = catkin_ws_mission/src/mavros
+	url = https://github.com/octanis1/mavros
