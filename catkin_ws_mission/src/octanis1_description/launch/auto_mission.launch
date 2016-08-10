@@ -1,7 +1,8 @@
 <launch>
   <!-- Run EKF state estimation for "base_link -> odom" transforms -->
-  <include file="$(find octanis1_description)/launch/ekf_state.launch"/>
-   
+  <!-- <include file="$(find octanis1_description)/launch/ekf_state.launch"/> -->
+  <include file="$(find octanis1_description)/launch/ekf_state_test.launch"/>   
+
   <!-- Run tf publishing of robot-attached frames -->
   <include file="$(find octanis1_description)/launch/description.launch"/>
 
