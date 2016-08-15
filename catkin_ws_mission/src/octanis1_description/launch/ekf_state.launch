@@ -15,14 +15,4 @@
       <remap from="imu/data" to="imu2/data" />
     </node>
 
-<!--
-    <node pkg="gps_common" type="utm_odometry_node" name="utm_odometry_node" clear_params="true">
-      <remap from="fix" to="mavros/global_position/raw/fix"/>
-      <remap from="odom" to="odometry/gps"/>
-      <param name="frame_id" value="odom" />
-      <param name="child_frame_id" value="" />
-
-    </node>
--->
-
 </launch>
