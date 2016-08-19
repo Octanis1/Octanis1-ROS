@@ -4,10 +4,6 @@
 
 #include <ros/ros.h>
 
-#include <sensor_msgs/Imu.h>
-#include <bullet/LinearMath/btMatrix3x3.h>
-#include <bullet/LinearMath/btQuaternion.h>
-
 #include <mavros_msgs/mavlink_convert.h>
 #include<stdio.h>
 #include<string.h>
@@ -47,11 +43,19 @@ int main(int argc, char **argv){
 
         //message generation
         //1. make named value float with type mavlink_message_t
-        mavlink_message_t msg;
-        mavlink_msg_named_value_float_pack(13, 21, &msg, stamp.toNSec()/1000, "remaining_memory", remaining_memory);
+        mavlink::mavlink_message_t msg;
+        mavlink::MsgMap map(msg);
 
-        //2. convert mavlink_message_t to mavros_msgs/Mavlink
-        /* inline bool convert(const mavlink_message_t &mmsg, mavros_msgs::Mavlink &rmsg, uint8_t framing_status = mavros_msgs::Mavlink::FRAMING_OK)*/
+	mavlink::common::msg::NAMED_VALUE_FLOAT mem_msg;
+
+	std::array<char, 10> name = {"rem_mem"};
+
+	mem_msg.time_boot_ms = stamp.toNSec()/1000;
+	mem_msg.name = name;
+	mem_msg.value = remaining_memory;
+
+
+	mem_msg.serialize(map);
 
         auto rmsg = boost::make_shared<mavros_msgs::Mavlink>();
 

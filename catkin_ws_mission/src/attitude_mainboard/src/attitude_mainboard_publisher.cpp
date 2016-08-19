@@ -61,14 +61,20 @@ int main(int argc, char **argv){
 	
 
 		//message generation
-		//1. make ATTITUDE with type mavlink_message_t
-		mavlink_message_t msg;
+		mavlink::mavlink_message_t msg;
+		mavlink::MsgMap map(msg);
 
 
-        mavlink_msg_attitude_pack(13, 21, &msg, stamp.toNSec()/1000, roll, pitch, yaw, 0, 0, 0);
+		mavlink::common::msg::ATTITUDE att;
 
-		//2. convert mavlink_message_t to mavros_msgs/Mavlink
-		/* inline bool convert(const mavlink_message_t &mmsg, mavros_msgs::Mavlink &rmsg, uint8_t framing_status = mavros_msgs::Mavlink::FRAMING_OK)*/
+		att.time_boot_ms = stamp.toNSec()/1000;
+		att.roll = roll;
+		att.pitch = pitch;
+		att.yaw = yaw;
+		att.rollspeed = att.pitchspeed = att.yawspeed;
+
+		att.serialize(map);
+
 
 		auto rmsg = boost::make_shared<mavros_msgs::Mavlink>();
 
