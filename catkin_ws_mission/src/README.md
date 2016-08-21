@@ -31,3 +31,7 @@ This package can be used to visualize the OctoMap datas.
 # pid_lidar
 
 This package uses a closed loop PID to control the speed of the lidar (which should be constant).
+
+#usb_cam
+
+This package under the folder name usb_cam-develop contains everything needed to get raw images from both camera and do processing with rectified images. Rectification is done by using precalibrated .yaml files which are stored in the `usb_cam-develop/launch/calibration` folder. There have been done for 640x480 resolutions.
