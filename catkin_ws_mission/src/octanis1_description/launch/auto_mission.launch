@@ -1,7 +1,6 @@
 <launch>
   <!-- Run EKF state estimation for "base_link -> odom" transforms -->
-  <!-- <include file="$(find octanis1_description)/launch/ekf_state.launch"/> -->
-  <include file="$(find octanis1_description)/launch/ekf_state_test.launch"/>   
+  <include file="$(find octanis1_description)/launch/ekf_state.launch"/>
 
   <!-- Run tf publishing of robot-attached frames -->
   <include file="$(find octanis1_description)/launch/description.launch"/>
@@ -22,6 +21,6 @@
   <include file="$(find octanis1_description)/launch/lidar_control.launch"/>
 
   <!-- Run camera launch file to launch the camera -->
-<!--  <include file="$(find octanis1_description)/launch/camera.launch"/> -->
+  <include file="$(find usb_cam)/launch/usb_cam_stereo.launch"/> 
 
 </launch>

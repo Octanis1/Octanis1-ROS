@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import sys
 import rospy
@@ -11,7 +13,7 @@ def shutdowner():
 
   if not os.getegid() == 0:
     sys.exit('Script must be run as root')
- 
+
   delay=5
 
   portToListen = port.PE5
