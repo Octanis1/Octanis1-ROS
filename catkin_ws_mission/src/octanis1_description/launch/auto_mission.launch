@@ -21,6 +21,6 @@
   <include file="$(find octanis1_description)/launch/lidar_control.launch"/>
 
   <!-- Run camera launch file to launch the camera -->
-  <include file="$(find usb_cam)/launch/usb_cam_stereo.launch"/> 
+  <!--  <include file="$(find usb_cam)/launch/usb_cam_stereo.launch"/> -->
 
 </launch>
