@@ -1,5 +1,4 @@
 #define MAVLINK_DIALECT common
-#include <mavlink.h>
 #include <ros/ros.h>
 #include "geometry_msgs/PoseWithCovarianceStamped.h"
 #include <tf2/LinearMath/Quaternion.h>
@@ -15,10 +14,14 @@ void mavlinkCallback(const mavros_msgs::Mavlink::ConstPtr &msg)
    if(msg->msgid==24)
    {
       mavlink::mavlink_message_t msgarm;
-      mavros_msgs::mavlink::convert(*msg, msgarm);
-      mavlink_gps_raw_int_t gps_raw_int;
-      mavlink_msg_gps_raw_int_decode(&msgarm, &gps_raw_int);
-      cog = gps_raw_int.cog;
+		mavros_msgs::mavlink::convert(*msg, msgarm);
+
+		mavlink::MsgMap map(msgarm);
+
+		mavlink::common::msg::GPS_RAW_INT gri;
+		gri.deserialize(map);
+
+      cog = gri.cog;
       if(cog > 3600){ // cog = degree * 100, so if > 3600 there is a problem
          cog = 0.0;
       }
