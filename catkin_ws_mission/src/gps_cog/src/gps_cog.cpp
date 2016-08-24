@@ -1,6 +1,5 @@
-
 #define MAVLINK_DIALECT common
-
+#include <mavlink.h>
 #include <ros/ros.h>
 #include "geometry_msgs/PoseWithCovarianceStamped.h"
 #include <tf2/LinearMath/Quaternion.h>
