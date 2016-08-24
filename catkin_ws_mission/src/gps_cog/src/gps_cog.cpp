@@ -15,10 +15,10 @@ void mavlinkCallback(const mavros_msgs::Mavlink::ConstPtr &msg)
 {
    if(msg->msgid==24)
    {
-      mavlink_message_t msgarm;
+      mavlink::mavlink_message_t msgarm;
       mavros_msgs::mavlink::convert(*msg, msgarm);
       mavlink_gps_raw_int_t gps_raw_int;
-      mavlink_msg_gps_raw_int_decode( &msgarm, &gps_raw_int);
+      mavlink_msg_gps_raw_int_decode(&msgarm, &gps_raw_int);
       cog = gps_raw_int.cog;
       if(cog > 3600){ // cog = degree * 100, so if > 3600 there is a problem
          cog = 0.0;
