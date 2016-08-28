@@ -20,7 +20,15 @@
   <!-- Run PI Lidar controller -->
   <include file="$(find octanis1_description)/launch/lidar_control.launch"/>
 
+  <!-- Run arming node for recording and arm acknowledgement -->
+  <include file="$(find octanis1_description)/launch/record.launch"/>
+
   <!-- Run camera launch file to launch the camera -->
-  <!--  <include file="$(find usb_cam)/launch/usb_cam_stereo.launch"/> -->
+  <include file="$(find usb_cam)/launch/usb_cam_stereo.launch"/>
+
+  <!-- Run rosbridge http server -->
+  <include file="$(find octanis1_description)/launch/rosbridge.launch"/>    
+
+
 
 </launch>

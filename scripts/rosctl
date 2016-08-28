@@ -1,0 +1,179 @@
+#!/bin/bash
+# Software License Agreement (BSD License)
+#
+# Copyright (c) 2013, I Heart Engineering
+# Copyright (c) 2014, Clearpath Robotics
+#
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+#  * Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#  * Redistributions in binary form must reproduce the above
+#    copyright notice, this list of conditions and the following
+#    disclaimer in the documentation and/or other materials provided
+#    with the distribution.
+#  * Neither the name of I Heart Engineering nor the names of its
+#    contributors may be used to endorse or promote products derived
+#    from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# Inspired by apachectl
+
+#/var/log/ros must exist and be writeable to rover:rover !
+
+DATE=`date`
+NOTIFY_USER=`ps -C gnome-session --no-headers -o user | head -1`
+USER=`id -un`
+ROS_SETUP=/home/rover/Octanis1-ROS/catkin_ws_mission/devel/setup.sh
+ROS_PORT=11311
+ROS_PID_FILENAME=roscore-$ROS_PORT.pid
+ROBOT_LAUNCH=/home/rover/Octanis1-ROS/catkin_ws_mission/src/octanis1_description/launch/auto_mission.launch
+
+# Load Environmental Varibles
+ROS_ENVVARS="/home/rover/Octanis1-ROS/scripts/envvars"
+if [ -f $ROS_ENVVARS ]; then
+  . $ROS_ENVVARS
+fi
+
+# Query info about a currently-running master on our selected port.
+RUNNING_ROSMASTER_PID=`lsof -t -i :${ROS_PORT} | head -n 1`
+if ! [ -z $RUNNING_ROSMASTER_PID ]; then
+  RUNNING_ROSCORE_PID=`grep ^PPid "/proc/${RUNNING_ROSMASTER_PID}/status" | cut -f 2`
+  RUNNING_ROSCORE_USER=`ps -p $RUNNING_ROSCORE_PID --no-headers -o user`
+fi
+
+# Find our ROS environment setup file
+if [ ! -s "${ROS_SETUP}" ]; then
+  logger -s -p user.err "rosctl cannot find ${ROS_SETUP}, unable to proceed"
+  exit 1
+fi
+
+source "${ROS_SETUP}"
+
+rosctl_usage () {
+    echo "Usage: $0 start|stop|restart|status"
+    echo "       $0 [-h|--help]"
+    exit 1
+}
+
+rosctl_notify () {
+    if hash notify-send 2>/dev/null; then
+        if [ -z $DISPLAY ]; then
+            DISPLAY=:0
+        fi
+     	/usr/bin/notify-send --urgency=normal --expire-time=1000 --icon=ros --category='network.connected' '<b>ROS</b>' "$@"
+    else
+        echo "Notify disabled"
+    fi
+}
+
+rosctl_start () {
+    ROS_SETUP_LINK_TARGET=$(readlink -f "${ROS_SETUP}")
+    logger -s "rosctl sourcing ${ROS_SETUP} -> ${ROS_SETUP_LINK_TARGET}"
+
+    if ! [ -z $RUNNING_ROSCORE_PID ]; then
+        logger -s -p user.err "Unable to start ROS - roscore ($RUNNING_ROSCORE_PID) already running as $RUNNING_ROSCORE_USER"
+        exit 1
+    fi
+    if [ -z "${ROS_HOSTNAME}" ]; then
+        ROS_HOSTNAME=${HOSTNAME}
+    fi
+    logger -s "Using ROS_HOSTNAME=${ROS_HOSTNAME}"
+
+    rosctl_notify "Starting robot as $USER"
+    if [ "$USER" = "root" ]; then
+        logger -s -p user.err "rosctl cannot currently be run as root"
+        return 1
+    fi
+
+    mkdir -p ${HOME}/.ros
+    if [ "$USER" = "rover" ]; then
+        logger -s "Starting ROS system daemon"
+        export ROS_LOG_DIR=/var/log/ros
+    else
+        logger -s "Starting ROS as user $USER"
+    fi
+    nohup roslaunch  --port=${ROS_PORT} ${ROBOT_LAUNCH} >& /tmp/ros-`date +%s`.log &
+}
+
+rosctl_stop () {
+    rosctl_notify "Stopping robot"
+    if [ -z $RUNNING_ROSCORE_PID ] ; then
+        logger -s -p user.err "Unable to stop ROS - roscore is not running"
+    elif [ $RUNNING_ROSCORE_USER = $USER ] || [ "$USER" = "root" ] ; then
+        kill -TERM $RUNNING_ROSCORE_PID
+        logger -s "Sent SIGTERM to roscore ($RUNNING_ROSCORE_PID)"
+        echo "Waiting for roscore to stop"
+        WAIT=10
+        while ps -p $RUNNING_ROSCORE_PID >& /dev/null; do
+            sleep 1
+            let WAIT=WAIT-1
+            if [ $WAIT == 0 ]; then
+                logger -s -p user.err "Sent SIGTERM, roscore ($RUNNING_ROSCORE_PID) may still be running" 
+                exit 1
+            fi
+        done
+        logger -s "roscore process stopped"
+    else 
+        logger -s -p user.err "Unable to stop ROS - roscore ($RUNNING_ROSCORE_PID) running as $RUNNING_ROSCORE_USER"
+    fi
+}
+
+rosctl_restart () {
+    rosctl_stop
+    if [ $? == 0 ]; then
+        rosctl_start
+    else
+        logger -s -p user.err "ROS not stopped, unable to restart"
+    fi
+}
+
+rosctl_status () {
+    echo "ROS Status"
+    echo "----------------"
+    echo "roscore"
+    if [ -z $RUNNING_ROSCORE_PID ] ; then
+        echo "  State: Not running"
+    else
+        echo "  State: Running"
+        echo "  PID:   $RUNNING_ROSCORE_PID"
+        echo "  User:  $RUNNING_ROSCORE_USER"
+    fi
+}
+
+if [ $# != 1 ] || [ -z $1 ] || [ $1 = "-h" ] || [ $1 = "--help" ] ; then
+    rosctl_usage
+elif [ $1 = "start" ] || [ $1 = "stop" ] || [ $1 = "restart" ] || [ $1 = "status" ]; then
+    CMD=$1
+    if [ $CMD = "start" ]; then
+        rosctl_start
+    elif [ $CMD = "stop" ]; then
+        rosctl_stop
+    elif [ $CMD = "restart" ]; then
+        rosctl_restart
+    elif [ $CMD = "status" ]; then
+        rosctl_status
+    fi
+else
+    echo "Error: Unknown command '$1'"
+    echo
+    rosctl_usage
+fi
+exit 0
+
