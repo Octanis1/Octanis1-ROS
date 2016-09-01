@@ -35,7 +35,6 @@
 #
 # Inspired by apachectl
 
-#/var/log/ros must exist and be writeable to rover:rover !
 
 DATE=`date`
 NOTIFY_USER=`ps -C gnome-session --no-headers -o user | head -1`
@@ -105,7 +104,7 @@ rosctl_start () {
     mkdir -p ${HOME}/.ros
     if [ "$USER" = "rover" ]; then
         logger -s "Starting ROS system daemon"
-        export ROS_LOG_DIR=/var/log/ros
+        export ROS_LOG_DIR=/dev/shm/roslogs
     else
         logger -s "Starting ROS as user $USER"
     fi

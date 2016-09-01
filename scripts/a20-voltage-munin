@@ -1,0 +1,16 @@
+#!/bin/sh
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title Voltage on A20
+graph_vlabel voltage
+voltage.label voltage
+graph_args --base 1000 -l 0
+graph_category system
+EOM
+        exit 0;;
+esac
+
+printf "voltage.value "
+cat /sys/power/axp_pmu/ac/voltage

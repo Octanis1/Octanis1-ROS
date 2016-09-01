@@ -2,10 +2,7 @@
 
     <rosparam command="load" file="$(find octanis1_description)/params/robot_localization.yaml" />
 
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true" />
-
-
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
       <remap from="odometry/filtered" to="odometry/filtered/global"/>
     </node>
 

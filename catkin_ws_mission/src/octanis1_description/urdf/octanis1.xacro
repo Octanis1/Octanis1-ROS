@@ -5,7 +5,7 @@
 	<xacro:property name="name_robot" value="octanis1" />
 	<!-- POSITION CONSTANTS (only whose which can change) -->
 	<xacro:property name="length_LIDAR" value="0.04" />
-	<xacro:property name="radius_LIDAR" value="0.035" />
+	<xacro:property name="radius_LIDAR" value="0.1" />
 	<xacro:property name="radius_wheel" value="0.075" />
 	<xacro:property name="length_wheel" value="0.045" />
 	<!-- INERTIAL CONSTANTS (because they can change) -->
@@ -186,11 +186,11 @@
 			</geometry>
 		</collision>
 	</link>
-	
+
 	<link name="LIDAR">
 		<xacro:default_inertia mass="${weight_LIDAR}"/>
 		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0"/> <!-- angle de 55 = 0.96 rad-->
+			<origin rpy="0 0 0" xyz="0 0 0"/>
 			<geometry>
 				<cylinder length="${length_LIDAR}" radius="${radius_LIDAR}"/>
 			</geometry>
@@ -198,42 +198,35 @@
 		</visual>
 	</link>
 
-        <link name="dGPS">
+  <link name="dGPS">
 		<xacro:default_inertia mass="${weight_dGPS}"/>
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0"/> <!-- angle de 55 = 0.96 rad-->
-			<geometry>
-				<cylinder length="0.1" radius="0.1"/>
-			</geometry>
-			<material name="black" />
-		</visual>
 	</link>
 
 	<link name="IMU" />
 	<link name="IMU2" />
 
-	<joint name="joint_axe_front_left" type="continuous">
+	<joint name="joint_axe_front_left" type="fixed">
 		<parent link="base_link" />
 		<child link="axe_front_left" />
 		<origin xyz="-0.1675 0 -0.02" rpy="-0.93 0 0" />
 		<axis xyz="1 0 0" />
 	</joint>
 
-	<joint name="joint_axe_front_right" type="continuous">
+	<joint name="joint_axe_front_right" type="fixed">
 		<parent link="base_link" />
 		<child link="axe_front_right" />
 		<origin xyz="0.1675 0 -0.02" rpy="-0.93 0 0" />
 		<axis xyz="1 0 0" />
 	</joint>
 
-	<joint name="joint_axe_back_right" type="continuous">
+	<joint name="joint_axe_back_right" type="fixed">
 		<parent link="base_link" />
 		<child link="axe_back_right" />
 		<origin xyz="0.1825 0 -0.02" rpy="-2.21 0 0" />
 		<axis xyz="1 0 0" />
 	</joint>
 
-	<joint name="joint_axe_back_left" type="continuous">
+	<joint name="joint_axe_back_left" type="fixed">
 		<parent link="base_link" />
 		<child link="axe_back_left" />
 		<origin xyz="-0.1825 0 -0.02" rpy="-2.21 0 0" />
@@ -246,7 +239,7 @@
 		<origin rpy="0 0.78 1.57" xyz="0 0.12 0.04"/>
 	</joint>
 
-        <joint name="joint_dGPS" type="fixed">
+  <joint name="joint_dGPS" type="fixed">
 		<parent link="base_link" />
 		<child link="dGPS" />
 		<origin xyz="0 0.10 0.08" rpy="0 0 0" />
@@ -264,28 +257,28 @@
 		<origin xyz="0 0.05 0" rpy="0 0 0" />
 	</joint>
 
-	<joint name="joint_wheel_front_left" type="continuous">
+	<joint name="joint_wheel_front_left" type="fixed">
 		<parent link="axe_front_left" />
 		<child link="wheel_front_left" />
 		<origin xyz="-0.03 0.25 0" rpy="0.93 0 0" />
 		<axis xyz="1 0 0" />
 	</joint>
 
-	<joint name="joint_wheel_front_right" type="continuous">
+	<joint name="joint_wheel_front_right" type="fixed">
 		<parent link="axe_front_right" />
 		<child link="wheel_front_right" />
 		<origin xyz="0.03 0.25 0" rpy="0.93 0 0" />
 		<axis xyz="1 0 0" />
 	</joint>
 
-	<joint name="joint_wheel_back_right" type="continuous">
+	<joint name="joint_wheel_back_right" type="fixed">
 		<parent link="axe_back_right" />
 		<child link="wheel_back_right" />
 		<origin xyz="0.03 0.25 0" rpy="2.21 0 0" />
 		<axis xyz="1 0 0" />
 	</joint>
 
-	<joint name="joint_wheel_back_left" type="continuous">
+	<joint name="joint_wheel_back_left" type="fixed">
 		<parent link="axe_back_left" />
 		<child link="wheel_back_left" />
 		<origin xyz="-0.03 0.25 0" rpy="2.21 0 0" />
