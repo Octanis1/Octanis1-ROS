@@ -13,3 +13,9 @@
 [submodule "catkin_ws_mission/src/tf2_web_republisher"]
 	path = catkin_ws_mission/src/tf2_web_republisher
 	url = https://github.com/RobotWebTools/tf2_web_republisher.git
+[submodule "catkin_ws_mission/src/web_video_server"]
+	path = catkin_ws_mission/src/web_video_server
+	url = https://github.com/RobotWebTools/web_video_server.git
+[submodule "catkin_ws_mission/src/async_web_server_cpp"]
+	path = catkin_ws_mission/src/async_web_server_cpp
+	url = https://github.com/GT-RAIL/async_web_server_cpp.git

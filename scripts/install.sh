@@ -7,3 +7,4 @@ ln -s $(pwd -P)/a20-voltage-munin  /etc/munin/plugins/a20-voltage-munin
 ln -s $(pwd -P)/a20-cputemp-munin  /etc/munin/plugins/a20-cputemp-munin
 ln -s $(pwd -P)/rostopic-munin  /etc/munin/plugins/rostopic-munin
 ln -s $(pwd -P)/rosctl /usr/sbin/rosctl
+ln -s $(pwd -P)/shutdown-pin-poller-monit /etc/monit/conf-enabled/shutdown-pin-poller-monit

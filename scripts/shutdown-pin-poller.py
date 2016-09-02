@@ -13,8 +13,8 @@ def shutdowner():
 
   delay=1
 
-  portToListen = port.PE5
-  portToWrite = port.PE4
+  portToListen = port.PI2 #13
+  portToWrite = port.PI1 #11
 
   gpio.init()
   gpio.setcfg(portToListen, gpio.INPUT)
@@ -29,8 +29,8 @@ def shutdowner():
             v=gpio.input(portToListen)
             if(v==1):
               print("shutdown of the Olimex")
-              #os.system("sudo halt -p")
-              #break
+              os.system("sudo halt -p")
+              break
         sleep(delay)
 
 if __name__ == '__main__':
