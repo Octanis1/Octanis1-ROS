@@ -11,7 +11,7 @@ def shutdowner():
   if not os.getegid() == 0:
     sys.exit('Script must be run as root')
 
-  delay=1
+  delay=5
 
   portToListen = port.PI2 #13
   portToWrite = port.PI1 #11
