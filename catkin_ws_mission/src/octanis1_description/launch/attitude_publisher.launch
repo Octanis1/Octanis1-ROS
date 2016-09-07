@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="attitude_mainboard" type="attitude_mainboard_publisher" name="attitude_mainboard_publisher" required="true" clear_params="true" output="screen">
+	</node>
+</launch>
+

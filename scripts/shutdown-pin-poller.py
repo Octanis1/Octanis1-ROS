@@ -2,6 +2,9 @@
 
 import os
 import sys
+sys.path.append("/home/rover/.local/lib/python2.7/site-packages")
+print sys.path
+
 from time import sleep
 from pyA20.gpio import gpio
 from pyA20.gpio import port

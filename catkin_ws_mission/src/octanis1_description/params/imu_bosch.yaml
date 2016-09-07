@@ -3,6 +3,6 @@ port: /dev/ttyS2
 # Tf frame id
 frame_id: IMU
 # Data reading frequency
-freqency: 50
+freqency: 20
 # Sensor operation mode --> modes could be found in sensor datasheet
 operation_mode: 0x08

@@ -26,7 +26,8 @@
   <!-- Run camera launch file to launch the camera -->
   <include file="$(find usb_cam)/launch/usb_cam_stereo.launch"/>
 
-  <!-- Run rosbridge http server -->
-  <include file="$(find octanis1_description)/launch/rosbridge.launch"/>    
+  <!-- Run attitude pub -->
+  <include file="$(find octanis1_description)/launch/attitude_publisher.launch"/>    
+
 
 </launch>

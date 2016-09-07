@@ -53,7 +53,7 @@ int main(int argc, char **argv){
     //Publisher part
 
     ros::Publisher attitude_pub = n.advertise<mavros_msgs::Mavlink>("mavlink/to", 2000);
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(0.5);
 
 
 	int count = 0;
@@ -78,8 +78,8 @@ int main(int argc, char **argv){
 
 		auto rmsg = boost::make_shared<mavros_msgs::Mavlink>();
 
-        rmsg->header.stamp = ros::Time::now();
-        mavros_msgs::mavlink::convert(msg, *rmsg);
+                rmsg->header.stamp = ros::Time::now();
+                mavros_msgs::mavlink::convert(msg, *rmsg);
 
 
 
