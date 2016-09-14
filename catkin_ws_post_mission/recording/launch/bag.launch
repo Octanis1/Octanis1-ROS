@@ -1,7 +1,7 @@
 <launch>
 
   <node pkg="rosbag" name="rosbag" type="record"
-    args=" -o /home/viki/launch -j 
+    args="--split --duration=15m -o /mnt/externalSD/ -j 
 /rpms
 /motor_input
 "

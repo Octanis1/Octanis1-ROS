@@ -1,3 +1,7 @@
 <launch>
-<node pkg="recording" name="record" type="record" output="screen"/>
+        <arg name="record_config_file" default="$(find octanis1_description)/params/record.yaml" />
+	
+	<node pkg="mavros" name="event_launcher" type="event_launcher" output="screen">
+	    <rosparam file="$(arg record_config_file)" command="load"/>
+	</node>
 </launch>

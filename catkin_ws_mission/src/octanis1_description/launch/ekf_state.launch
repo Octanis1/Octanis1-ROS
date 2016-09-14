@@ -6,10 +6,11 @@
       <remap from="odometry/filtered" to="odometry/filtered/global"/>
     </node>
 
+<!--
     <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true">
       <remap from="odometry/filtered" to="odometry/filtered/global"/>
-      <remap from="gps/fix" to="mavros/global_position/raw/fix" />
+      <remap from="gps/fix" to="mavros/global_position/global" />
       <remap from="imu/data" to="imu2/data" />
     </node>
-
+-->
 </launch>

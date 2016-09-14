@@ -1,0 +1,4 @@
+rosbag_armed:
+  event: [armed, disarmed]
+  action: run, stop
+  shell: rosrun rosbag record -a --split --duration=1800 --lz4 -o '/mnt/externalSD/roverbag/'

@@ -37,7 +37,7 @@ def convert_to_volts_callback(r):
 
     # Publish to motor_input (will then be transmitted via i2c to motor)
     pub = rospy.Publisher('motor_input', UInt16, queue_size=10)
-    rospy.loginfo(pwm)
+#    rospy.loginfo(pwm)
     pub.publish(pwm)
 
 

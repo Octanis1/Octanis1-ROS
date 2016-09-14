@@ -30,7 +30,6 @@
       <param name="camera_info_url" value="File:///home/rover/Octanis1-ROS/catkin_ws_mission/src/usb_cam-develop/launch/calibration/right_cam.yaml" />
     </node>
   </group>
-  <node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc" respawn="true" >
-  </node>
+<!--  <node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc" respawn="true" /> -->
 </launch>
 

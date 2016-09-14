@@ -32,6 +32,7 @@ def shutdowner():
             v=gpio.input(portToListen)
             if(v==1):
               print("shutdown of the Olimex")
+	      gpio.output(portToWrite, 1)
               os.system("sudo halt -p")
               break
         sleep(delay)

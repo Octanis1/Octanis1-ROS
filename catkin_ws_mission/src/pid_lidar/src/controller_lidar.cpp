@@ -44,7 +44,7 @@
 
 void plant_state_callback(const std_msgs::UInt16& state_msg)
 {
-  if (state_msg.data < 600) // To avoid blown up values
+  if (state_msg.data < 1000) // To avoid blown up values
   {
   if ( !((Kp<=0. && Ki<=0. && Kd<=0.) || (Kp>=0. && Ki>=0. && Kd>=0.)) ) // All 3 gains should have the same sign
   {
@@ -58,14 +58,15 @@ void plant_state_callback(const std_msgs::UInt16& state_msg)
   error.at(0) = setpoint - plant_state; // Current error goes to slot 0
 
   //..... reset error if it saturates .....
-  if ((error.at(0)>=max_error) && (error.at(1)>=max_error) && (error.at(2)>=max_error))
+/*  if ((error.at(0)>=max_error) && (error.at(1)>=max_error) && (error.at(2)>=max_error))
   {
     error.at(0) = 0.0;
     error.at(1) = 0.0;
     error.at(2) = 0.0;
     ROS_INFO("Error reset");
   }
-  // ......
+*/  
+// ......
 
   // calculate delta_t
   if (!prev_time.isZero()) // Not first time through the program  
